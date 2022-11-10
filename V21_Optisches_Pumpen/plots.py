@@ -8,7 +8,7 @@ def B_feld(N, I , R):
 
 
 #Messwerte einlesen
-f, Isweep_peak1, I_hor_peak1, Isweep_peak2, Ihor_peak2 = np.genfromtxt('Data/rf_modulation.txt', comments='#', unpack=True, delimiter='     ')
+f, Isweep_peak1, I_hor_peak1, Isweep_peak2, I_hor_peak2 = np.genfromtxt('Data/rf_modulation.txt', comments='#', unpack=True, delimiter=', ')
 
 
 #Als erstes Magnetfeld staerke der vertikal spule berechnen
@@ -28,3 +28,11 @@ Bhor_peak2 = B_feld(154, I_hor_peak2, 0.1579) # Bfeld der Horizontal Spule bei P
 
 #Da die Vertikale Komponente der Spulen das Erdmagnetfeld kompensiert ist für spätere rechungen noch die horizontal/sweep komponente von belang
 
+plt.figure()
+
+plt.plot(f,Bsweep_peak1+Bhor_peak1, label='Messwerte 1 Peak')
+plt.plot(f, Bsweep_peak2+Bhor_peak2, label='Messwerte 2 Peak')
+plt.legend()
+plt.xlabel('Horizontales Magnetfeld ' + r'$B / G$')
+plt.ylabel('RF-Spulen Frequenz ' + r'$f/Hz$')
+plt.savefig('content/plots/landefaktor.pdf')
