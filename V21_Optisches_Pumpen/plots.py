@@ -1,6 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+from uncertainties import ufloat
+from scipy.constants import mu_0 , h , elementary_charge , electron_mass, hbar , eV
+mu_B = elementary_charge*hbar/(2*electron_mass)
 
 #funktionen
 
@@ -10,9 +13,17 @@ def B_feld(N, I , R):
 def gerade(x,a,b):
     return a*x+b
 
+def lande(a):
+    return h/(mu_B*a)
+
+def I(landefaktor):
+    return 1/landefaktor-0.5
+
 #Messwerte einlesen
 f, Isweep_peak1, I_hor_peak1, Isweep_peak2, I_hor_peak2 = np.genfromtxt('Data/rf_modulation.txt', comments='#', unpack=True, delimiter=', ')
 
+#f von kHz zu Hz
+f = f*10**(6)
 
 #Als erstes Magnetfeld staerke der vertikal spule berechnen
 #1 Umdrehung = 0.1A
@@ -20,35 +31,54 @@ f, Isweep_peak1, I_hor_peak1, Isweep_peak2, I_hor_peak2 = np.genfromtxt('Data/rf
 I_ver = 0.1 * 2.25 # vertikal spulen Strom vertikal
 B_ver = B_feld(20, I_ver, 11.735*10**(-2))
 
+#hor spule umdrehung = 0.3A
+I_hor_peak1 = I_hor_peak1*0.3
+I_hor_peak2 = I_hor_peak2*0.3
+
+#sweep spule umdrehung = 0.1 A
+Isweep_peak1 = Isweep_peak1*0.1
+Isweep_peak2 = Isweep_peak2*0.1
+
 print('Vertikales B-Feld zur komopensation des Erdmagnetfelds: ', B_ver)
 
 
 #Die anderen B felder berechnen
-Bsweep_peak1 = B_feld(11, Isweep_peak1, 0.1639) # Bfeld der Sweep Spule bei Peak 1
+Bsweep_peak1 = B_feld(11, Isweep_peak1, 0.1639) # Bfeld der Sweep Spule bei Peak 1 in T
 Bsweep_peak2 = B_feld(11, Isweep_peak2, 0.1639) # Bfeld der Sweep Spule bei Peak 2
 Bhor_peak1 = B_feld(154, I_hor_peak1, 0.1579) # Bfeld der Horizontal Spule bei Peak 1
 Bhor_peak2 = B_feld(154, I_hor_peak2, 0.1579) # Bfeld der Horizontal Spule bei Peak 2
+
 
 #ausgleichsrechung
 params1, cov1 = curve_fit(gerade, f, Bsweep_peak1+ Bhor_peak1)
 params2, cov2 = curve_fit(gerade, f, Bsweep_peak2+ Bhor_peak2)
 x = np.linspace(np.min(f), np.max(f), 1000)
 
-print('Landefaktor Isotop 1: ', params1[0], 'Erdmagnetfeld horizontal: ', params1[1])
-print('Landefaktor Isotop 2: ', params2[0], 'Erdmagnetfeld horizontal: ', params2[1])
-print('Abweichung der beiden Erdmagnetfeldwerte: ', abs(params1[1]-params2[1])/params2[1])
+lande1 = ufloat(params1[0], cov1[0][0]**0.5)
+lande2 = ufloat(params2[0], cov2[0][0]**0.5)
+
+lande1 = lande(lande1)
+lande2 = lande(lande2)
+
+
+
+print('Landefaktor Isotop 1: ',lande1, 'Erdmagnetfeld horizontal: ', ufloat(params1[1], cov1[1][1]**0.5))
+print('Landefaktor Isotop 2: ', lande2, 'Erdmagnetfeld horizontal: ', ufloat(params2[1], cov2[1][1]**0.5))
+print('Kernspin I Iostop 1: ', I(lande1))
+print('Kernspin I Iostop 2: ', I(lande2))
+print('Abweichung der beiden Erdmagnetfeldwerte: ', abs(ufloat(params1[1], cov1[1][1]**0.5)-ufloat(params2[1], cov2[1][1]**0.5)/ufloat(params2[1], cov2[1][1]**0.5)))
 
 #Da die Vertikale Komponente der Spulen das Erdmagnetfeld kompensiert ist für spätere rechungen noch die horizontal/sweep komponente von belang
 
 plt.figure()
 
-plt.plot(f,Bsweep_peak1+Bhor_peak1, label='Messwerte Isotop 1')
-plt.plot(x, gerade(x, params1[0], params1[1]), label='Ausgleichsgerade Isotop 1')
-plt.plot(f, Bsweep_peak2+Bhor_peak2, label='Messwerte Isotop 2')
-plt.plot(x, gerade(x, params2[0], params2[1]), label='Ausgleichsgerade Isotop 2')
+plt.plot(f/10**3,Bsweep_peak1+Bhor_peak1, label='Messwerte Isotop 1')
+plt.plot(x/10**3, gerade(x, params1[0], params1[1]), label='Ausgleichsgerade Isotop 1')
+plt.plot(f/10**3, Bsweep_peak2+Bhor_peak2, label='Messwerte Isotop 2')
+plt.plot(x/10**3, gerade(x, params2[0], params2[1]), label='Ausgleichsgerade Isotop 2')
 plt.legend()
 plt.ylabel('Horizontales Magnetfeld ' + r'$B / G$')
-plt.xlabel('RF-Spulen Frequenz ' + r'$f/Hz$')
+plt.xlabel('RF-Spulen Frequenz ' + r'$f/kHz$')
 plt.savefig('content/plots/landefaktor.pdf')
 
 plt.close()
