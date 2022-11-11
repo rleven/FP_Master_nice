@@ -88,7 +88,7 @@ plt.figure()
 
 plt.plot(f/10**3,Bsweep_peak1+Bhor_peak1,'x', label='Messwerte Isotop 1')
 plt.plot(x/10**3, gerade(x, params1[0], params1[1]), label='Ausgleichsgerade Isotop 1')
-plt.plot(f/10**3, Bsweep_peak2+Bhor_peak2,'x', label='Messwerte Isotop 2')
+plt.plot(f/10**3, Bsweep_peak2+Bhor_peak2,'kx', label='Messwerte Isotop 2')
 plt.plot(x/10**3, gerade(x, params2[0], params2[1]), label='Ausgleichsgerade Isotop 2')
 plt.legend()
 plt.ylabel('Horizontales Magnetfeld ' + r'$B / G$')
@@ -114,8 +114,8 @@ ampli2, num_per2, t2 = np.genfromtxt('Data/rabi-osc2.txt', comments='#', unpack=
 
 #perioden dauer einer periode berechnen
 
-t1 = t1/num_per1
-t2 = t2/num_per2
+t1 = t1/num_per1 *10**-3
+t2 = t2/num_per2 *10**-3
 
 #########
 
@@ -129,11 +129,11 @@ print('Gefragt wert b/b: ', params4[1]/params3[1])
 plt.figure()
 
 
-plt.plot(ampli1,t1, 'x',label='Messwerte Isotop 1')
-plt.plot(x, hyp(x, params3[0], params3[1]),'--',alpha=0.8 ,label='Ausgleichsgerade Isotop 1')
-plt.plot(ampli2,t2, 'x',label='Messwerte Isotop 2')
-plt.plot(x, hyp(x, params4[0], params4[1]),'--',alpha=0.8, label='Ausgleichsgerade Isotop 2')
+plt.plot(ampli1,t1*10**3, 'x',label='Messwerte Isotop 1')
+plt.plot(x, hyp(x, params3[0], params3[1])*10**3,'--',alpha=0.8 ,label='Ausgleichsgerade Isotop 1')
+plt.plot(ampli2,t2*10**3, 'kx',label='Messwerte Isotop 2')
+plt.plot(x, hyp(x, params4[0], params4[1])*10**3,'--',alpha=0.8, label='Ausgleichsgerade Isotop 2')
 plt.legend()
-plt.ylabel('Periodendauer ' + r'$T / s$')
+plt.ylabel('Periodendauer ' + r'$T / ms$')
 plt.xlabel('RF-Amplitude ' + r'$/V$')
 plt.savefig('content/plots/periodendauer.pdf')
