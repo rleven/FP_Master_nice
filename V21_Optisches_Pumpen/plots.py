@@ -4,11 +4,12 @@ from scipy.optimize import curve_fit
 from uncertainties import ufloat
 from scipy.constants import mu_0 , h , elementary_charge , electron_mass, hbar , eV
 mu_B = elementary_charge*hbar/(2*electron_mass)
-
+E_Hyper_1 = 4.53*10**(-24) #J
+E_Hyper_2 = 2.01*10**(-24) #J
 #funktionen
 
 def B_feld(N, I , R):
-    return 9*10**(-3) * (N*I)/R #return ist in Gaus
+    return 9*10**(-7) * (N*I)/R #return ist in Gaus
 
 def gerade(x,a,b):
     return a*x+b
@@ -19,10 +20,14 @@ def lande(a):
 def I(landefaktor):
     return 1/landefaktor-0.5
 
+def delta_E(B,g_F,M_F,E_Hyperfein):
+    return g_F*mu_B*B+(1-2*M_F)*(g_F*mu_B*B)**2/E_Hyperfein
+
+
 #Messwerte einlesen
 f, Isweep_peak1, I_hor_peak1, Isweep_peak2, I_hor_peak2 = np.genfromtxt('Data/rf_modulation.txt', comments='#', unpack=True, delimiter=', ')
 
-#f von kHz zu Hz
+#f von MHz zu Hz
 f = f*10**(6)
 
 #Als erstes Magnetfeld staerke der vertikal spule berechnen
@@ -60,21 +65,30 @@ lande2 = ufloat(params2[0], cov2[0][0]**0.5)
 lande1 = lande(lande1)
 lande2 = lande(lande2)
 
+B_1 = Bsweep_peak1+Bhor_peak1
+B_2 = Bsweep_peak2+Bhor_peak2
 
+del_E1 = delta_E(B_1[-1],lande1,2,E_Hyper_1)
+del_E2 = delta_E(B_2[-1],lande2,3,E_Hyper_2)
+
+del_E1_eV = del_E1/eV*10**9
+del_E2_eV = del_E2/eV*10**9
 
 print('Landefaktor Isotop 1: ',lande1, 'Erdmagnetfeld horizontal: ', ufloat(params1[1], cov1[1][1]**0.5))
 print('Landefaktor Isotop 2: ', lande2, 'Erdmagnetfeld horizontal: ', ufloat(params2[1], cov2[1][1]**0.5))
 print('Kernspin I Iostop 1: ', I(lande1))
 print('Kernspin I Iostop 2: ', I(lande2))
+print('Quadratischer zeeman 1: ', del_E1_eV)
+print('Quadratischer zeeman 2: ', del_E2_eV)
 print('Abweichung der beiden Erdmagnetfeldwerte: ', abs(ufloat(params1[1], cov1[1][1]**0.5)-ufloat(params2[1], cov2[1][1]**0.5)/ufloat(params2[1], cov2[1][1]**0.5)))
 
 #Da die Vertikale Komponente der Spulen das Erdmagnetfeld kompensiert ist für spätere rechungen noch die horizontal/sweep komponente von belang
 
 plt.figure()
 
-plt.plot(f/10**3,Bsweep_peak1+Bhor_peak1, label='Messwerte Isotop 1')
+plt.plot(f/10**3,Bsweep_peak1+Bhor_peak1,'x', label='Messwerte Isotop 1')
 plt.plot(x/10**3, gerade(x, params1[0], params1[1]), label='Ausgleichsgerade Isotop 1')
-plt.plot(f/10**3, Bsweep_peak2+Bhor_peak2, label='Messwerte Isotop 2')
+plt.plot(f/10**3, Bsweep_peak2+Bhor_peak2,'x', label='Messwerte Isotop 2')
 plt.plot(x/10**3, gerade(x, params2[0], params2[1]), label='Ausgleichsgerade Isotop 2')
 plt.legend()
 plt.ylabel('Horizontales Magnetfeld ' + r'$B / G$')
@@ -115,9 +129,9 @@ print('Gefragt wert b/b: ', params4[1]/params3[1])
 plt.figure()
 
 
-plt.plot(ampli1,t1, label='Messwerte Isotop 1')
+plt.plot(ampli1,t1, 'x',label='Messwerte Isotop 1')
 plt.plot(x, hyp(x, params3[0], params3[1]),'--',alpha=0.8 ,label='Ausgleichsgerade Isotop 1')
-plt.plot(ampli2,t2, label='Messwerte Isotop 2')
+plt.plot(ampli2,t2, 'x',label='Messwerte Isotop 2')
 plt.plot(x, hyp(x, params4[0], params4[1]),'--',alpha=0.8, label='Ausgleichsgerade Isotop 2')
 plt.legend()
 plt.ylabel('Periodendauer ' + r'$T / s$')
