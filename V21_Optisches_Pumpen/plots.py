@@ -78,8 +78,8 @@ print('Landefaktor Isotop 1: ',lande1, 'Erdmagnetfeld horizontal: ', ufloat(para
 print('Landefaktor Isotop 2: ', lande2, 'Erdmagnetfeld horizontal: ', ufloat(params2[1], cov2[1][1]**0.5))
 print('Kernspin I Iostop 1: ', I(lande1))
 print('Kernspin I Iostop 2: ', I(lande2))
-print('Quadratischer zeeman 1: ', del_E1_eV)
-print('Quadratischer zeeman 2: ', del_E2_eV)
+print('Quadratischer zeeman 1: ', del_E1_eV, 'zu Magnetfeld: ', B_1[-1])
+print('Quadratischer zeeman 2: ', del_E2_eV, 'zu Magnetfeld: ', B_2[-1])
 print('Abweichung der beiden Erdmagnetfeldwerte: ', abs(ufloat(params1[1], cov1[1][1]**0.5)-ufloat(params2[1], cov2[1][1]**0.5)/ufloat(params2[1], cov2[1][1]**0.5)))
 
 #Da die Vertikale Komponente der Spulen das Erdmagnetfeld kompensiert ist für spätere rechungen noch die horizontal/sweep komponente von belang
@@ -93,6 +93,7 @@ plt.plot(x/10**3, gerade(x, params2[0], params2[1]), label='Ausgleichsgerade Iso
 plt.legend()
 plt.ylabel('Horizontales Magnetfeld ' + r'$B / G$')
 plt.xlabel('RF-Spulen Frequenz ' + r'$f/kHz$')
+plt.tight_layout()
 plt.savefig('content/plots/landefaktor.pdf')
 
 plt.close()
@@ -124,7 +125,9 @@ params4, cov4 = curve_fit(hyp, ampli2, t2, p0=(1,1))
 
 x = np.linspace(np.min(ampli1), np.max(ampli1), 1000)
 
-print('Gefragt wert b/b: ', params4[1]/params3[1])
+print('Fitparameter 1 a:', ufloat(params3[0], cov3[0][0]**0.5),'b: ', ufloat(params3[1], cov3[1][1]**0.5))
+print('Fitparameter 2 a:', ufloat(params4[0], cov4[0][0]**0.5),'b: ', ufloat(params4[1], cov4[1][1]**0.5))
+print('Gefragt wert b/b: ', ufloat(params4[1], cov4[1][1]**0.5)/ufloat(params3[1], cov3[1][1]**0.5))
 
 plt.figure()
 
