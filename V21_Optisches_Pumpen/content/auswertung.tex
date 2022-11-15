@@ -2,13 +2,16 @@
 \section{Auswertung}
 \label{sec:auswertung}
 \subsection{Landefaktoren}
-Um optimale Ergebnisse zu erzielen muss zunächst die Horizontal Komponente des Erdmagnetfeldes berechnet werden da diese einen störenden Offset in den Daten verursacht.
-Dafür wird, wie in Abschnitt \ref{sec:durchfuerung} beschrieben, das Magnetfeld der Horizontal Spule solange varriert bis sich drei schmaller Peaks zeigen.
-Der größte davon ist korrespondieret zu der vollen komepensation des Magnetfelds in eine Richtung.
+Um optimale Ergebnisse zu erzielen muss zunächst die vertikale Komponente des Erdmagnetfeldes komepensiert werden da diese einen störenden Offset in den Daten verursacht.
+Dafür wird, wie in Abschnitt \ref{sec:durchfuerung} beschrieben, das Magnetfeld der vertikale Spule solange varriert bis sich drei schmaller Peaks zeigen.
+Der Größte davon korrespondiert zu der vollen Komepensation des Magnetfelds in eine Richtung.
 Die anderen Peaks treten dann auf wenn die Zeeman-Aufspaltung gleich der RF-Spulen Energie ist.
-Aus diesem Grund wird die Stärke des angelegten Magnetfeldes $B$ an den Peaks nun gegen die RF-Spulenfrequenz $f$ geplottet.
+Es wird die B-Feld Stärke verwendet bei der die Peaks am schmallsten sind.
+Dies wird bei einem Wert von $B_\text{v} = \SI{3.45e-5}{\tesla}$ erreicht.
+Danach wird mit Hilfe einer horizontalen Sweep Spule die Magnetfeld Stärke in dieser Raumrichtung geändert.
+Die horizontale B-Feldstärke in den Peaks wird dann gegen die angelegte RF-Spulelenfrequenz geplottet.
 Der resultierende Plot ist in Abbildung \ref{fig:lande} zu sehen.
-Da beiden Isotope unterschiedliche Landefaktoren haben unterscheidet sich auch die Steigung der Gerade die durch das auftragen der $B$ und $f$ Werte entsteht.
+Da beiden Isotope unterschiedliche Landefaktoren haben unterscheidet sich auch die Steigung der Geraden die durch das Auftragen der $B$ und $f$ Werte entsteht.
 Um nun das Erdmagnetfeld in Horizontal Richtung zu bestimmen wird für beide Isotope eine Ausgleichsgerade nach der Gleichung 
 \begin{equation}
     B(f) = a\cdot f + b
@@ -25,7 +28,6 @@ und die für das zweite Isotop sind
     b_\text{Iso2} &= \SI{2.34(7)e-05}{\tesla} \, .
 \end{align*}
 Der Wert $b$ gibt nun die jeweilige horizontale Erdmagnetfeldstärke an.
-Da $b_\text{Iso1}$ zu $b_\text{Iso2}$ eine Abweichugn von $\SI{1.00(4)}{}\%$ zeigt, scheint das Experiment gut ausgerichtet zu sein.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{content/plots/landefaktor.pdf}
@@ -53,13 +55,32 @@ kann mithilfe der Gleichung \eqref{eq:landefaktor} der Kernspin werden, da dies 
 So ergeben sich für die oben genannten Werte des Landefaktors die Kernspins 
 \begin{align*}
     I_\text{Iso1} &= \SI{1.522(30)}{}\\
-    I_\text{Iso2} &= \SI{2.515(15)}{}
+    I_\text{Iso2} &= \SI{2.515(15)}{} \, .
 \end{align*}
 
-In der Quelle \cite{pdf_anleitung} ist angeben, dass das Isotop {$^{85}\text{Rb}$ einen Kernspin von $\frac{5}{2}$} und das Isotop $^{87}\text{Rb}$ einen Kernspin von $\frac{3}{2}$ hat.
+In Quelle \cite{pdf_anleitung} ist angeben, dass das Isotop {$^{85}\text{Rb}$ einen Kernspin von $\frac{5}{2}$} und das Isotop $^{87}\text{Rb}$ einen Kernspin von $\frac{3}{2}$ hat.
 Damit erschließt sich, dass Isotop 1  $^{87}\text{Rb}$ ist und Isotop 2 $^{85}\text{Rb}$ entspricht.
 
-\subsection{Isotopen Verhältnisse}
+\subsection{Isotopenverhältnis}
+Für die Bestimmung des Isotopenverhältnis wird die Abbildung \ref{fig:isotop} in 'inkscape' \cite{Inkscape} eingefügt um die Breite der Peaks in Anzahl von Pixeln zu zählen.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Data/isotope.jpeg}
+    \caption{Ein Foto der Messung die mit einem Oszilloskop aufgenommen wird.
+    Diese trägt das angelegte Magnetfeld gegen den Strom der Photodiode auf.
+    Es sind drei negative Peaks zu sehen.
+    Von links nach rechts korrespondieren diese zu dem Nulldurchgang des angelegte Magnetfeldes, dem 1. Isotop und dem zweiten Isotop.}
+    \label{fig:isotop}
+\end{figure}
+Für den linken negativen Peak wird eine Anzahl von $10.93$ Pixeln und für den Rechten $21.971$ Pixel gezählt.
+Damit stellt sich ein Isotopenverhältnis von 
+\begin{align*}
+    ^{87}\text{Rb} \, &\widehat{=}\, 33.22\% \\
+    ^{85}\text{Rb} \, &\widehat{=}\, 66.77\%
+\end{align*}
+ein.
+
 \subsection{Quadraitsche Zeemanaufspaltung}
 Um die Stärke der maximalen quadratischen Zeemanaufspaltung bei gegebenen Versuchsaufbau abzuschätzen wird bei der Resonanzfrequenz von $\SI{100}{\k\Hz}$ das größt mögliche Magnetfeld genutzt.
 Aus Quelle \cite{pdf_anleitung} ist zu entnehmen, dass für $^{85}\text{Rb}$ $m_\text{F} = 3$ ist und für $^{87}\text{Rb}$ $m_\text{F} = 2$ ist.
@@ -67,7 +88,7 @@ Daraus kann nun mit Gleichung \eqref{eq:zeemanaufspaltung} die maximale Zeemanau
 Die Aufspaltungen zu den jeweiligen Magnetfeldstärken sind
 \begin{align*}
     \Delta E_\text{Iso1} = \SI{4.77(7)}{\eV} & B=\SI{0.1665}{\m\tesla} \\
-    \Delta E_\text{Iso2} = \SI{4.557(23)}{\eV} & B=\SI{0.2377}{\m\tesla} 
+    \Delta E_\text{Iso2} = \SI{4.557(23)}{\eV} & B=\SI{0.2377}{\m\tesla}  \, .
 \end{align*}
 
 \subsection{Rabioszillation}
@@ -96,8 +117,14 @@ Für Isotop 2 ergeben sich die Parameter
     a_\text{Iso2} &= \SI{0.145(26)}{\ms}\\
     b_\text{Iso2} &= \SI{6.01(6)}{\V\ms} \, .
 \end{align*}
-Der gefragt Qutient aus $\frac{b_\text{Iso2}}{b_\text{Iso1}}$ kann nun berechnet werden.
+Der gefragt Quotient aus $\frac{b_\text{Iso2}}{b_\text{Iso1}}$ kann nun berechnet werden.
 Dieser beträgt 
 \begin{align*}
     \frac{b_\text{Iso2}}{b_\text{Iso1}} &= \SI{1.525(26)}{} \, .
 \end{align*}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Data/anstieg.jpeg}
+    \caption{Der Anstieg des Photodioden-Stroms nach Einschalten des RF-Feldes.
+    Es ist der typische exponentielle Verlauf zu erkennen.}
+\end{figure}

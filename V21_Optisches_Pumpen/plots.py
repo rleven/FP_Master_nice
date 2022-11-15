@@ -133,9 +133,9 @@ plt.figure()
 
 
 plt.plot(ampli1,t1*10**3, 'x',label='Messwerte Isotop 1')
-plt.plot(x, hyp(x, params3[0], params3[1])*10**3,'--',alpha=0.8 ,label='Ausgleichsgerade Isotop 1')
+plt.plot(x, hyp(x, params3[0], params3[1])*10**3,'--',alpha=0.8 ,label='Ausgleichsfunktion Isotop 1')
 plt.plot(ampli2,t2*10**3, 'kx',label='Messwerte Isotop 2')
-plt.plot(x, hyp(x, params4[0], params4[1])*10**3,'--',alpha=0.8, label='Ausgleichsgerade Isotop 2')
+plt.plot(x, hyp(x, params4[0], params4[1])*10**3,'--',alpha=0.8, label='Ausgleichsfunktion Isotop 2')
 plt.legend()
 plt.ylabel('Periodendauer ' + r'$T / ms$')
 plt.xlabel('RF-Amplitude ' + r'$/V$')
