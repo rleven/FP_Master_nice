@@ -5,7 +5,7 @@
 \date{%
   Date of experiment: 21.\,November 2022
   \\
-  Date of submission: 28.\,November 2022
+  Date of submission: 01.\,December 2022
 }
 
 \begin{document}
@@ -20,6 +20,20 @@
 \input{content/durchfuehrung.tex}
 \input{content/auswertung.tex}
 \input{content/diskussion.tex}
+
+\appendix
+
+\begin{table}[H]
+  \centering
+  \caption{Measured data}
+  \resizebox{!}{10cm}{%
+  \csvreader[tabular=c|c|c|c|c,
+  head=false, 
+  table head= $\Delta t$ in s & shield resistance in $\Omega$ & probe resistance in $\Omega$ & voltage in \si{\volt} & current in \si{\ampere} \\\midrule,
+  late after line= \\]
+  {Data/data.csv}{1=\eins, 2=\zwei, 3=\drei, 4=\vier, 5=\five}{$\num{\eins}$ & $\num{\zwei}$ & $\num{\drei}$ & $\num{\vier}$ & $\num{\five}$}}
+  \label{tab:data}
+\end{table}
 
 \newpage
 \printbibliography{}
