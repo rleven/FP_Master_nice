@@ -104,5 +104,29 @@ plt.ylabel('Ausgangsspannung / V')
 plt.xscale('log')
 plt.yscale('log')
 plt.legend()
-plt.savefig('build/Umkehr_int.pdf')
+plt.savefig('build/inv_int.pdf')
+#plt.show()
+
+################################################################################
+#
+#   Umkehr-Differenzierer
+#
+################################################################################
+
+
+data5 = np.genfromtxt('data/inv_diff.csv', comments='#', delimiter=',') #u in, u out, freq
+
+params5, cov5 = curve_fit(fit,(data5[:4, 2]), data5[:4,1], p0=(1,1))
+print('fit5 parameters: a ', un.ufloat(params5[0], np.sqrt(cov5[0,0])), ' b ', un.ufloat(params5[1], np.sqrt(cov5[1,1])))
+x1 = np.linspace(2, 10**3, 10000)
+
+plt.figure()
+plt.plot(data5[:,2], data5[:,1],'rx', label='Gemessene Spannung')
+plt.plot(x1, fit(x1, params5[0], params5[1]), label='Fit')
+plt.xlabel('Frequenz in Hz')
+plt.ylabel('Ausgangsspannung / V')
+plt.xscale('log')
+plt.yscale('log')
+plt.legend()
+plt.savefig('build/inv_diff.pdf')
 #plt.show()
