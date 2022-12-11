@@ -75,7 +75,7 @@ for i in range(3):
     plt.xlabel('Frequenz in Hz')
     plt.ylabel('Phase / °')
     plt.legend()
-    plt.savefig('build/inv_lin_' + str(i+1) + '.pdf')
+    plt.savefig('build/inv_lin_phase' + str(i+1) + '.pdf')
 #    plt.show()
 plt.close()
 

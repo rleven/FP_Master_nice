@@ -1,2 +1,104 @@
 \section{Auswertung}
 \label{sec:auswertung}
+In diesem Teil werden die Messwerte der verschiedenen Schlatungen vorgestellt und erläutert.
+Dabei wird in der Reihenfolge der Durchführung vorgegangen.
+\subsection{Fehlerrechung}
+
+\subsection{invertierter Linearverstärker}
+Als erste Schaltung wird der invertierter Linearverstärker aufgebaut.
+Der Aufbau ist in Abschnitt \section{sec:durchfuehrung} im Detail erklärt.
+Für die Schaltung werden drei Messungen durchgeführt.
+Dabei werden die Widerstände ausgetauscht um unterschiedliche Spannungsverstärkungen zu erzielen.
+
+Die genutzten Widerstände der verschiedenen Messungen sind in Tabelle \ref{tab:wider_inv_lin} zu sehen.
+\begin{table}
+    \centering
+    \begin{tabular}{ccc}
+        \toprule
+        Messung & $R_1 \, / \, k\Omega $ & $R_2 \, / \,  k\Omega $ \\
+        \midrule 
+        1 & 1 & 100 \\
+        2 & 47 & 100 \\
+        3 & 47 & 220 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Die genutzen Widerstände für den invertierter Linearverstärker für drei Messdurchgänge.}
+    \label{tab:wider_inv_lin}
+\end{table}
+Bei den Messdurchgänge werden wie in Abschnitt \ref{sec:durchfuehrung} beschrieben, für verschiedenen Frequenzen die Phase zwischen Eingangs und Ausgangsspannung, sowie die Höhe der Ausgangsspannung gemessen.
+Danach wird aus dem Quotienten der Eingangsspannung und Ausgangsspannung die Verstärkung $V^{,}$ berechnet.
+Die Verstärkung ist in Form eines doppelt logarithmischen Plots in Abbildung \ref{fig:inv_lin} zu sehen.
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.49\linewidth}%
+        \includegraphics[width=\textwidth]{build/inv_lin_1.pdf}
+        \subcaption{Messwerte der Messung 1.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\linewidth}%
+        \includegraphics[width=\textwidth]{build/inv_lin_2.pdf}
+        \subcaption{Messwerte der Messung 2.}
+    \end{subfigure}\\
+    \begin{subfigure}{0.49\linewidth}%
+        \includegraphics[width=\textwidth]{build/inv_lin_3.pdf}
+        \subcaption{Messwerte der Messung 3.}
+    \end{subfigure}
+    \caption{Die Messwerte der Verstärkung durch den invertierten Linearverstärkers. Es wird die Verstärkung gegen die Frequenz der Eingangsspannung geplottet.
+    Dies geschieht in einer Plot mit doppelt logarithmischer Achse. Ein Fit wird für den abfallenden Bereich angefertigt, welcher als blaue Linie zu erkennen ist.}
+    \label{fig:inv_lin}
+\end{figure}
+Die Ausgleichfunktion für die Messwerte wird mithilfe der Funktion
+\begin{equation}
+    Fit(f) = a f^b
+\end{equation}
+durchgeführt.
+Die Ausgleichrechung ergibt für die Parameter $a$ und $b$ der verschiedenen Messreiehen die Widerstände
+\begin{align}
+
+    Fit_1(f) &= \SI{6.9(28)e5}{\frac{\V}{\Hz}} f^{-\SI{1.02(4)}} \\
+    Fit_2(f) &= \SI{5.7e8}{\frac{\V}{\Hz}} f^{-1.51}\\
+    Fit_3(f) &= \SI{1.2e4}{\frac{\V}{\Hz}} f^{-0.68}
+
+\end{align}
+
+Aufgrund der doppelt logarithmischen Achsen und der geringen Anzahl von Messwerten im abfallenden Bereich, könne für Messung 2 und 3 durch die Funktion 'curve_fit' des python Pakets 'scipy' \cite{scipy} keine Unsicherheiten bestimmt werden.
+Für den Plateubereich, welcher für geringe Frequenzen im invertierten Linearverstärker erkennbar ist wird der Mittelwert der Verstärkung berechnet.
+Bei der Berechnung der Mittelwerte werden dabei unterschiedlich viele Messwerte genutzt, je nachdem wie lang das Plateu bei der jeweiligen Konfiguration ist.
+In Tabelle \ref{tab:inv_lin_mittel} sind die berechneten Mittelwerte aufgetragen. 
+In der Tabelle sind zudem die Anzahl der genutzten Messpunkte der jeweiligen Messung, sowie die theoretische Verstärkung zu sehen.
+Die theoretische Verstärkung wird dabei nach Gleichung \eqref{eq:verstaerkung} berechnet. 
+\begin{table}
+    \centering
+    \begin{tabular}{ccc}
+        \toprule
+        Messung & Anzahl Messpunkte & Mittelwert $\bar{V^{,}} $ & theoretische Verstärkung $V_\text{theo}^{,}$ \\
+        \midrule
+        1 & 4 & $\SI{93.600(2100)}$ & 100\\
+        2 & 8 & $\SI{2.080(0)} $& 2.126 \\
+        3 & 7 & $\SI{4.680(50)} $& 4.680 \\
+        \bottomrule 
+    \end{tabular}
+    \label{tab:inv_lin_mittel}
+\end{table} 
+Abgesehen von der Ausgangsspannung, aus der die Verstärkung berechnet wird, wird auch die Phase zwischen Eingangsspannung und Ausgangsspannung gemessen.
+Diese wird anschließend gegen die Frequenz aufgetragen.
+Die resultierenden Plots sind in Abbildung \ref{fig:phase} zu sehen.
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.49\linewidth}%
+        \includegraphics[width=\textwidth]{build/inv_phase1.pdf}
+        \subcaption{Messwerte der Messung 1.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.49\linewidth}%
+        \includegraphics[width=\textwidth]{build/inv_phase2.pdf}
+        \subcaption{Messwerte der Messung 2.}
+    \end{subfigure}\\
+    \begin{subfigure}{0.49\linewidth}%
+        \includegraphics[width=\textwidth]{build/inv_phase3.pdf}
+        \subcaption{Messwerte der Messung 3.}
+    \end{subfigure}
+    \caption{Die Messwerte der Phase zwischen Eingangsspannung und Ausgangsspannung beim invertierten Linearverstärkers. Die Phase wird gegen die Frequenz der Eingangsspannung geplottet.
+    Dies geschieht in einer Plot mit logarithmischer y-Achse.}
+    \label{fig:phase}
+\end{figure}
