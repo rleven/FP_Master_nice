@@ -162,11 +162,11 @@ plt.savefig('build/inv_diff.pdf')
 plt.close()
 
 
-data6 = np.genfromtxt('data/scope_15.csv', comments='#', delimiter=',', deletechars='+-') #s, u in, u out
+data6 = np.genfromtxt('data/scope_16.csv', comments='#', delimiter=',', deletechars='+-') #s, u in, u out
 
 plt.figure()
 plt.plot(data6[:,0], data6[:,1],'rx', label='angelegte Spannung')
-plt.plot(data6[:,0], data6[:,2],'k0', label='Output Spannung')
+plt.plot(data6[:,0], data6[:,2],'ko', label='Output Spannung')
 plt.xlabel('Zeit in s')
 plt.ylabel('Spannung / V')
 plt.legend()
