@@ -18,6 +18,9 @@ def fit(freq,a,b):
 def logfit(freq, a,b):
     return a*freq+b
 
+def Grenzamplification(U1, U2):
+    return U2/U1 *np.sqrt(2)
+
 data1 = np.genfromtxt('data/inv_linear_1.csv', comments='#', delimiter=',') #freq, phase, voltage
 data2 = np.genfromtxt('data/inv_linear2.csv', comments='#', delimiter=',')
 data3 = np.genfromtxt('data/inv_linear3.csv', comments='#', delimiter=',')
@@ -34,6 +37,7 @@ V3 = un.ufloat(np.mean(data3[:7,2]/U_in_3), np.std(data3[:7,2]/U_in_3))
 print('Average Values of amplification: V1 ', V1, ' V2 ', V2, ' V3 ', V3)
 print('calculated amplifications: V1', -100/1, ' V2 ', -100/47, ' V3 ', -220/47)
 
+
 #fit in the decreasing area
 params1, cov1 = curve_fit(fit,(data1[4:, 0]), (ampli(U_in_1, data1[4:,2])), p0=(1,1))
 params2, cov2 = curve_fit(fit,(data2[8:, 0]), (ampli(U_in_2, data2[8:,2])), p0=(1,1))
@@ -43,9 +47,28 @@ x1 = np.linspace(8000, 200000, 10000)
 x2 = np.linspace(4*10**5, 1.5*10**6, 10000)
 x3 = np.linspace(9*10**4, 7*10**5, 10000)
 
+a1 = un.ufloat(params1[0], np.sqrt(cov1[0,0]))
+b1 = un.ufloat(params1[1], np.sqrt(cov1[1,1]))
+a2 = un.ufloat(params2[0], np.sqrt(cov2[0,0]))
+b2 = un.ufloat(params2[1], np.sqrt(cov2[1,1]))
+a3 = un.ufloat(params3[0], np.sqrt(cov3[0,0]))
+b3 = un.ufloat(params3[1], np.sqrt(cov3[1,1]))
+
+
 print('fit1 parameters: a ', un.ufloat(params1[0], np.sqrt(cov1[0,0])), ' b ', un.ufloat(params1[1], np.sqrt(cov1[1,1])))
 print('fit2 parameters: a ', un.ufloat(params2[0], np.sqrt(cov2[0,0])), ' b ', un.ufloat(params2[1], np.sqrt(cov2[1,1])))
 print('fit3 parameters: a ', un.ufloat(params3[0], np.sqrt(cov3[0,0])), ' b ', un.ufloat(params3[1], np.sqrt(cov3[1,1])))
+
+
+# Grenzfrequenz
+print('Grenzfrequenz 1 :', ((np.sqrt(100/2)/a1)**(1/b1)))
+print('Grenzfrequenz 2 :', ((np.sqrt(100/2)/a2)**(1/b2)))
+print('Grenzfrequenz 3 :', ((np.sqrt(100/2)/a3)**(1/b3)))
+
+# Bandbreitenprodukt
+print('Bandbreitenprodukt 1 :', V1*((np.sqrt(100/2)/a1)**(1/b1)))
+print('Bandbreitenprodukt 2 :', V2*((np.sqrt(100/2)/a2)**(1/b2)))
+print('Bandbreitenprodukt 3 :', V3*((np.sqrt(100/2)/a3)**(1/b3)))
 
 # plots
 data = [data1, data2, data3]
@@ -92,15 +115,17 @@ plt.close()
 
 data4 = np.genfromtxt('data/umkehr_int.csv', comments='#', delimiter=',') #u in, u out, freq
 
-params4, cov4 = curve_fit(fit,(data4[:4, 2]), data4[:4,1], p0=(1,1))
+data4[:, 1] = data4[:,1]/data4[:,0]
+
+params4, cov4 = curve_fit(fit,(data4[:, 2]), data4[:,1], p0=(1,1))
 print('fit4 parameters: a ', un.ufloat(params4[0], np.sqrt(cov4[0,0])), ' b ', un.ufloat(params4[1], np.sqrt(cov4[1,1])))
-x1 = np.linspace(2, 10**3, 10000)
+x1 = np.linspace(2, 2*10**3, 10000)
 
 plt.figure()
 plt.plot(data4[:,2], data4[:,1],'rx', label='Gemessene Spannung')
 plt.plot(x1, fit(x1, params4[0], params4[1]), label='Fit')
-plt.xlabel('Frequenz in Hz')
-plt.ylabel('Ausgangsspannung / V')
+plt.xlabel('Frequenz ' + r'$f / Hz$')
+plt.ylabel('Ausgangsspannung ' + r'$U_{out} / V$')
 plt.xscale('log')
 plt.yscale('log')
 plt.legend()
@@ -116,9 +141,12 @@ plt.savefig('build/inv_int.pdf')
 
 data5 = np.genfromtxt('data/inv_diff.csv', comments='#', delimiter=',') #u in, u out, freq
 
-params5, cov5 = curve_fit(fit,(data5[:4, 2]), data5[:4,1], p0=(1,1))
+data5[:, 1] = data5[:,1]/data5[:,0]
+
+
+params5, cov5 = curve_fit(fit,(data5[:, 2]), data5[:,1], p0=(1,1))
 print('fit5 parameters: a ', un.ufloat(params5[0], np.sqrt(cov5[0,0])), ' b ', un.ufloat(params5[1], np.sqrt(cov5[1,1])))
-x1 = np.linspace(2, 10**3, 10000)
+x1 = np.linspace(2, 2*10**3, 10000)
 
 plt.figure()
 plt.plot(data5[:,2], data5[:,1],'rx', label='Gemessene Spannung')
@@ -129,4 +157,18 @@ plt.xscale('log')
 plt.yscale('log')
 plt.legend()
 plt.savefig('build/inv_diff.pdf')
+#plt.show()
+
+plt.close()
+
+
+data6 = np.genfromtxt('data/scope_15.csv', comments='#', delimiter=',', deletechars='+-') #s, u in, u out
+
+plt.figure()
+plt.plot(data6[:,0], data6[:,1],'rx', label='angelegte Spannung')
+plt.plot(data6[:,0], data6[:,2],'k0', label='Output Spannung')
+plt.xlabel('Zeit in s')
+plt.ylabel('Spannung / V')
+plt.legend()
+plt.savefig('build/scope_15.pdf')
 #plt.show()
