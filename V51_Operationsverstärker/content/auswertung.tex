@@ -80,7 +80,7 @@ In der Tabelle sind zudem die Anzahl der genutzten Messpunkte der jeweiligen Mes
 Die theoretische Verstärkung wird dabei nach Gleichung \eqref{eq:verstaerkung} berechnet.
 Zudem wird die Grenzfrequenz 
 \begin{equation*}
-  f_\text{Grenz} = \sqrt(V_\text{theo}')/a)**(1/b)
+  f_\text{Grenz} = \sqrt{(V_\text{theo}')}/a)^{(1/b)}
 \end{equation*}
 berechnet, wobei $V_\text{theo}'$ die nach Gleichung \eqref{eq:verstaerkung} berechnete Verstärkung für die gegebene Schaltung ist.
 In der Tabelle ist außerdem das Bandbreitenprodukt
@@ -127,7 +127,7 @@ Die resultierenden Plots sind in Abbildung \ref{fig:phase} zu sehen.
 \end{figure}
 In den Plots ist zu erkennen, dass es für kleine Frequenz ein Plateu für Phase $\approx 180\,\si{\degree}$ gibt.
 Bei höheren Frequenzen fällt die Phase exponentiell ab, bis diesem einen geringen Wert von $(0-40)\,\si{\degree}$ erreicht hat.
-
+\FloatBarrier
 \subsection{Umkehr Integrator}
 Die nächste Schaltung die untersucht wird ist der Umkehr Integrator.
 Für diesen wird der Aufbau gemäß \ref{sec:durchfuehrung} umgebaut.
@@ -170,7 +170,7 @@ Die Bilder, welches das Oszilloskop produziert, können in Abbildung \ref{fig:um
     \label{fig:umkehr_oszi}
 \end{figure}
 Die erwartete Eigenschaft des bilden der Stammfunktion des Eingangssignals ist zu erkennen.
-
+\FloatBarrier
 \subsection{invertierender-Differenzierer}
 Nun wird die Schaltung eines invertierenden-Differenzieres, wie in \ref{sec:durchfuehrung} beschrieben, aufgebaut.
 Bei dem Messvorgang wird genauso wie zuvor beim Umkehr Integrator vorgegangen.
@@ -184,7 +184,7 @@ Die gemessene Ausgangsspannung wird wieder gegen die Frequenz in einem doppelt l
 \end{figure}
 Es wird ein Fit nach Funktion \eqref{eq:fit} angefertigt, dieser ergibt sich zu 
 \begin{equation*}
-    Fit_5 = \SI{0.0058(22)}{\frac{\V}{\Hz}} f^{\SI{1.09(5)}{}}
+    Fit_5(f) = \SI{0.0058(22)}{\frac{\V}{\Hz}} f^{\SI{1.09(5)}{}}
 \end{equation*}
 und wird ebenfalls in der Abbildung \ref{fig:inv_diff} gezeigt.\\\\
 Um die Eigenschaft des invertierenden-Differenzieres besser zu untersuchen werden drei verschiedene Eingangssignale in die Schaltung gegeben.
@@ -209,7 +209,7 @@ Die entehenden Bilder können in Abbildung \ref{fig:dif_oszi} gesehen werden.
     Das gelbe Signal ist dabei immer das Eingangssignals des invertierenden-Differenzieres, das grüne Signal ist das Ausgangssignal der Schaltung.}
     \label{fig:dif_oszi}
 \end{figure}
-
+\FloatBarrier
 \subsection{nicht-invertierenden-Schmitt-Trigger}
 Nun wird die Schaltung zu einem nicht-invertierenden-Schmitt-Trigger umgebaut.
 Dieser weist bei ein binäres Verhalten auf.
@@ -238,6 +238,7 @@ An dem Punkt der Kippspannung wird ein Bild mit dem Oszilloskop aufgenommen, die
     Die Aufnahme wird an dem Punkt der Kippspannung aufgenommen, also gerade da, wo die Spannung des Schmitt-Triggers auf $U=\SI{29.1}{\V}$ steigt.}
     \label{fig:schmitt_oszi}
 \end{figure}
+\FloatBarrier
 \subsection{Signalgenerator}
 Die letzte Schaltung die untersucht wird ist der Signalgenerator, welcher aus dem Schmitt-Trigger und dem invertierenden-Integrator besteht.
 Es werden die Frequenz $f_\text{gen}$ und Amplitude $U_\text{a,2}$ des Ausgangssignal gemessen.
@@ -251,7 +252,7 @@ Die gemessenen Werte für eine Eingangsspannung von $U_\text{in} = \SI{5.30(5)}{
 Die theoretische Werte für die Amplitude und Frequenz können mithilfe von Gleichung \eqref{eq:generator_ampl} beziehungsweise \eqref{eq:generator_freq} berechnet werden.
 Diese ergeben die Zahlenwerte 
 \begin{align*}
-    U_\text{a,1,theo} &= \SI{2.77(5)}{\V} \\
+    U_\text{a,2,theo} &= \SI{2.77(5)}{\V} \\
     f_\text{gen,theo} &= \SI{2.5}{\kilo\Hz} \, .
 \end{align*}
 Eine Aufnahme des Bildes vom Oszilloskop wird in Abbildung \ref{fig:gen_oszi} gezeigt.
