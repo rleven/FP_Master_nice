@@ -6,7 +6,7 @@ Dabei wird in der Reihenfolge der Durchführung vorgegangen.
 
 \subsection{invertierter Linearverstärker}
 Als erste Schaltung wird der invertierter Linearverstärker aufgebaut.
-Der Aufbau wird in Abschnitt \section{sec:durchfuehrung} im Detail erklärt.
+Der Aufbau wird in Abschnitt \ref{sec:durchfuehrung} im Detail erklärt.
 Für die Schaltung werden drei Messungen durchgeführt.
 Dabei werden die Widerstände ausgetauscht um unterschiedliche Spannungsverstärkungen zu erzielen.
 
@@ -76,14 +76,13 @@ In der Tabelle ist außerdem das Bandbreitenprodukt
 \end{equation*}
 aufgezeigt.
 \begin{table}
-    \centering
     \begin{tabular}{cccccc}
         \toprule
         Messung & Anzahl Messpunkte & Mittelwert $\bar{V}'$ & theoretische Verstärkung $V_\text{theo}'$ & Grenzfrequenz $f_\text{Grenz}$ & Bandbreitenprodukt $B$\\
         \midrule
-        1 & 4 & $\SI{93.600(2100)}{}$ & 100 & $\SI{79763.77(5000)}{\Hz}$ & $\SI{74.77(5000)e5}{\Hz}$\\
-        2 & 8 & $\SI{2.080(0)}{} $& 2.126 & $\SI{166918.65}{\Hz} $& $\SI{3.47e5}{\Hz}$\\
-        3 & 7 & $\SI{4.680(50)}{} $& 4.680 &$\SI{50399.22}{\Hz}$ & $\SI{2.35(24)e5}{}$\\
+        1 & 4 & $\SI{93.600(2100)}{}$ & 100 & $\SI{79.76(50)}{\kilo\Hz}$ & $\SI{74.77(5000)e2}{\kilo\Hz}$\\
+        2 & 8 & $\SI{2.080(1)}{} $& 2.126 & $\SI{166.91}{\kilo\Hz} $& $\SI{3.47(27)e2}{\kilo\Hz}$\\
+        3 & 7 & $\SI{4.680(50)}{} $& 4.680 &$\SI{50.39}{\kilo\Hz}$ & $\SI{2.35(24)e2}{\kilo\Hz}$\\
         \bottomrule 
     \end{tabular}
     \label{tab:inv_lin_mittel}
@@ -186,11 +185,69 @@ Die entehenden Bilder können in Abbildung \ref{fig:dif_oszi} gesehen werden.
         \includegraphics[width=\textwidth]{data/dif_dreieck.png}
         \subcaption{Das Eingangssignals ist eine Dreiecksspannung, das Ausgangssignal ist eine Rechteckspannung überlagert mit einer gedämpften Schwingung.}
     \end{subfigure}\\
-    \begin{subfigure}{0.49\linewidth}%
-        \includegraphics[width=\textwidth]{data/dif_sinus.png}
-        \subcaption{Das Eingangssignal ist eine Sinusspannung, das Ausgangssignal ist ein Cosinussignal.}
-    \end{subfigure}
+    %\begin{subfigure}{0.49\linewidth}%
+    %    \includegraphics[width=\textwidth]{data/dif_sinus.png}
+    %    \subcaption{Das Eingangssignal ist eine Sinusspannung, das Ausgangssignal ist eine Rechteckspannung.}
+    %\end{subfigure}
     \caption{Die Bildschirmfotos des Oszilloskop bei verschiedenen Eingangssignals und Ausgangssignalen.
     Das gelbe Signal ist dabei immer das Eingangssignals des invertierenden-Differenzieres, das grüne Signal ist das Ausgangssignal der Schaltung.}
     \label{fig:dif_oszi}
 \end{figure}
+
+\subsection{nicht-invertierenden-Schmitt-Trigger}
+Nun wird die Schaltung zu einem nicht-invertierenden-Schmitt-Trigger umgebaut.
+Dieser weist bei ein binäres Verhalten auf.
+Bei einer gewissen Eingangsspannung $U_\text{Schmitt}$, die auch Kippspannung genannt wird, erhöht sich die Ausgangsspannung des Schmitt-Triggers von $U_\text{out}= \SI{0}{\V}$ auf $U_\text{out}\approx \SI{30}{\V}$.
+Es ist nun von interesse bei welcher Spannung die Kippspannung liegt.
+Der gemessene Wert der Kippspannung liegt bei 
+\begin{align*}
+    U_\text{Schmitt} &= \SI{3.26}{\V}
+\end{align*}
+wobei der theoretische Wert, bestimmt durch Gleichung \eqref{eq:schmitt} bei 
+\begin{align*}
+    U_\text{Schmitt,theo} &= \SI{2.91(5)}{\V}
+\end{align*}
+liegt.
+Die nötigen Werte für die Berechnung von $ U_\text{Schmitt,theo}$ werden dabei zuvor gemessen und ergeben sich zu
+\begin{align*}
+    R_1 &= \SI{100}{\kilo\ohm}\\
+    R_2 &= \SI{1000}{\kilo\ohm}\\
+    U_B &= \SI{29.10(5)}{\V} \, .
+\end{align*}
+An dem Punkt der Kippspannung wird ein Bild mit dem Oszilloskop aufgenommen, dieses ist in Abbildung \ref{fig:schmitt_oszi} zu sehen.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{data/schmitt.png}
+    \caption{Eine Aufnahme des Oszilloskop, wobei das Eingangssignal in den Schmitt-Trigger als gelbe Linie zu erkennen ist und das Ausgangssignal als grüne Linie.
+    Die Aufnahme wird an dem Punkt der Kippspannung aufgenommen, also gerade da, wo die Spannung des Schmitt-Triggers auf $U=\SI{29.1}{\V}$ steigt.}
+    \label{fig:schmitt_oszi}
+\end{figure}
+\subsection{Signalgenerator}
+Die letzte Schaltung die untersucht wird ist der Signalgenerator, welcher aus dem Schmitt-Trigger und dem invertierenden-Integrator besteht.
+Es werden die Frequenz $f_\text{gen}$ und Amplitude $U_\text{a,2}$ des Ausgangssignal gemessen.
+Zudem wird die Amplitude des Signals zwischen Schmitt-Trigger und Integrator $U_\text{a,1}$ gemessen.
+Die gemessenen Werte für eine Eingangsspannung von $U_\text{in} = \SI{5.30(5)}{\V}$ sind 
+\begin{align*}
+    U_\text{a,1} &= \SI{27.30(5)}{\V} \\
+    U_\text{a,2} &= \SI{5.20(5)}{\V} \\
+    f_\text{gen} &= \SI{1.61}{\kilo\Hz} \, .
+\end{align*}
+Die theoretische Werte für die Amplitude und Frequenz können mithilfe von Gleichung \eqref{eq:generator_ampl} beziehungsweise \eqref{eq:generator_freq} berechnet werden.
+Diese ergeben die Zahlenwerte 
+\begin{align*}
+    U_\text{a,1,theo} &= \SI{2.77(5)}{\V} \\
+    f_\text{gen,theo} &= \SI{2.5}{\kilo\Hz} \, .
+\end{align*}
+Eine Aufnahme des Bildes vom Oszilloskop wird in Abbildung \ref{fig:gen_oszi} gezeigt.
+Dabei sind die dargestellten Signal das Signal zwischen Schmitt-Trigger und Integrator in grün und das Ausgangssignal des Signalgenerators in gelb.
+Es ist zu erkennen, dass der Signalgenerator eine Dreiecksspannung erzeugt.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{data/generator.png}
+    \caption{Dargestellt werden das Signal ziwschen Schmitt-Trigger und Integrator in grün, sowie das Ausgangssignal des Signalgenerators in gelb.
+    Das Bild wird mit einem Oszilloskop aufgenommen.}
+    \label{fig:gen_oszi}
+\end{figure}
+
+
+
