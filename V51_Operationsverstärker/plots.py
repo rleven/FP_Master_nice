@@ -9,6 +9,9 @@ import uncertainties as un
 #
 ##############################################################
 
+def Abweichung(x1, x2):
+    return np.abs(np.abs(x1)-np.abs(x2))/x2 *100
+
 def ampli(U1,U2): #returns amplification factor from U1 to U2
     return U2/U1 #U1 input U2 output
 
@@ -36,7 +39,7 @@ V3 = un.ufloat(np.mean(data3[:7,2]/U_in_3), np.std(data3[:7,2]/U_in_3))
 
 print('Average Values of amplification: V1 ', V1, ' V2 ', V2, ' V3 ', V3)
 print('calculated amplifications: V1', -100/1, ' V2 ', -100/47, ' V3 ', -220/47)
-
+print('Abweichung exp zu theorie: V1 ', Abweichung(V1, -100), ' V2 ', Abweichung(V2,-100/47 ), ' V3 ', Abweichung(V3, -220/47) )
 
 #fit in the decreasing area
 params1, cov1 = curve_fit(fit,(data1[4:, 0]), (ampli(U_in_1, data1[4:,2])), p0=(1,1))
@@ -172,3 +175,29 @@ plt.ylabel('Spannung / V')
 plt.legend()
 plt.savefig('build/scope_15.pdf')
 #plt.show()
+
+######################################################################################
+#
+# Schmitt-Trigger
+#
+######################################################################################
+
+R_1 = 10000
+R_p = 100000
+U_B = un.ufloat(29.1,0.05)
+print('Schmitt Kippspannung: ', R_1/R_p *U_B)
+print('Schmitt Abweichung ', Abweichung(3.26,  R_1/R_p *U_B))
+######################################################################################
+#
+# Signal-Generator
+#
+######################################################################################
+
+R_1 = 10000 #Ohm
+R_2 = 100000
+R_3 = 1000
+C = 1*10**(-6) #Farad
+U_max = un.ufloat(27.7,0.05)
+
+print('Signal Generator: Frequenz ', R_2/(4*R_1*C*R_3), ' Amplitude ', U_max*(R_1/R_2))
+print('Abweichung Generator: ', Abweichung(5.20, U_max*(R_1/R_2)))

@@ -1,2 +1,40 @@
 \section{Diskussion}
 \label{sec:diskussion}
+In diesem Teil des Protokolls werden die Ergebnisse mit den theoretischen Werten verglichen um mögliche Fehlerquellen erläutert, die zu Abweichungen zwischen Theorie und Experiment führen.
+\subsection{invertierter Linearverstärker}
+Zunächst wird für den Linearverstärker die Abweichung der Verstärkung berechnet, diese ist in Tabelle \ref{tab:lin_disk} zu sehen.
+Die Abweichung liegen alle unter $7\,\%$ und sind damit im experimentellen Rahmen.
+Die Abweichung scheint für kleine Verstärkungen geringer zu sein als für große Verstärkungen.
+Dies weist daraufhin, dass es besser ist den Linearverstärker nur für geringe Verstärkungen zu verwenden um ein zuverlässiges Ergebniss zu erhalten.
+\begin{table}
+    \centering
+    \begin{tabular}{cccc}
+        \toprule
+        &Messung 1 & Messung 2 & Messung 3\\
+        \midrule
+        Mittelwert $\bar{V}'$ & $\SI{93.600(2100)}{}$ &  $\SI{2.080(1)}{} $&  $\SI{4.680(50)}{} $ \\
+        theoretische Verstärkung $V_\text{theo}'$ & 100 & 2.126 & 4.680 \\
+        Abweichung$\,\%$ & $\SI{6.4(21)}{} $& $\SI{2.2(1)}{}$ & $\SI{0.0(10)}{}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Die Abweichung der theoretischen Verstärkung zur experimentellen Verstärkung.}
+    \label{tab:lin_disk}
+\end{table}
+Die Verstärkung der invertierenden Linearverstärkers zeigt das erwartete Plateu für niedrige Frequenz.
+Ab einer Grenzfrequenz, die mit der theoretischen Grenzfrequenz übereinstimmt, fällt die Verstärkung exponentiell bis auf 0 ab.
+\subsection{Umkehr Integrator und invertierender-Differenzierer}
+Der Umkehrintegrator und der invertierender-Differenzierer bilden wie erwartet die Stammfunktion beziehungsweise die Ableitung des Eingangssignal, was in den Abbildung \ref{fig:umkehr_oszi} und \ref{fig:dif_oszi} zu erkennen ist.
+Die Ausgangsspannung weist das ewartete Verhalten auf und eine Ausgleichsgerade konnte gut an die Messwerte gelegt werden.
+\subsection{Schmitt-Trigger}
+Wie erwartet springt die Ausgangsspannung des Schmitt-Triggers ab einer Grenzamplitude auf $\approx \SI{30}{\V}$.
+Die Abweichung der experimentellen Grenzamplitude $U_\text{Schmitt} = \SI{3.26}{\V}$ zu der theoretischen $U_\text{Schmitt,theo} = \SI{2.91(5)}{\V}$ beträgt $Abw = \SI{12.03(19)}{}\%$.
+Der Schmitt-Trigger hat damit wie erwartet funktioniert, weißt aber eine gewisse Abweichung zwischen Experiment und Theorie auf.
+Diese kann mit den schlechten Kontakten der Steckplatine begründert werden, die zu einem höheren Widerstand geführt haben können.
+\subsection{Signalgenerator}
+Der Generator hat das erwartete Dreiecksspannungs Signal ausgegeben, allerdings hatte dieses mit $U_\text{a,2} = \SI{5.20(5)}{\V}$ eine höhere Spannung als theoretisch ${U_\text{a,2,theo} = \SI{2.77(5)}{\V}}$ erwartet.
+Die Abweichung des experimentellen Wertes zum Theoretischen beträgt $Abw = \SI{87.73(34)}{}\%$.
+Es ist wahrscheinlich, dass auch hier die Steckplatine für einen höheren Widerstand gesorgt hat, weswegen das Ausgangssignal verfälscht wurde.
+\\\\
+Die Schaltungen könnten durch gelötete Kontakt verbessert werden, da diese weniger Fehleranfällig sind und nur einen sehr kleinen Widerstand haben.
+Dies würde natürlich zu einem größeren Aufwand führen.
+Zudem schienen die Operationsverstärker teilweise kaputt zu sein, was ebenfalls zu Fehlern geführt haben könnte.

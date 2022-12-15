@@ -1,9 +1,22 @@
 \section{Auswertung}
 \label{sec:auswertung}
-In diesem Teil werden die Messwerte der verschiedenen Schlatungen vorgestellt und erläutert.
+In diesem Teil werden die Messwerte der verschiedenen Schaltungen vorgestellt und erläutert.
 Dabei wird in der Reihenfolge der Durchführung vorgegangen.
 \subsection{Fehlerrechung}
-
+Zur Fehlerrechnung werden die Fehlerpfortpflanzung nach Gauß
+\begin{equation}
+    \sigma_f = \sqrt{\left(\frac{\partial f}{\partial x}\right)^2 \sigma_x ^2 + \left( \frac{\partial f}{\partial y}\right)^2 \sigma_y ^2 + ...}
+\end{equation}
+genutzt.
+Die Standardabweichung des Mittelwerts wird nach
+\begin{equation}
+    \sigma_{\bar{x}} = \sqrt{\frac{1}{N(N-1)} \sum_{k=1}^N (x_k - \bar{x})^2}
+\end{equation}
+mit 
+\begin{equation}
+    \bar{x} = \frac{1}{N} \sum_{k=1} ^N x_k
+\end{equation}
+berechnet.
 \subsection{invertierter Linearverstärker}
 Als erste Schaltung wird der invertierter Linearverstärker aufgebaut.
 Der Aufbau wird in Abschnitt \ref{sec:durchfuehrung} im Detail erklärt.
@@ -25,7 +38,7 @@ Die genutzten Widerstände der verschiedenen Messungen sind in Tabelle \ref{tab:
     \caption{Die genutzen Widerstände für den invertierter Linearverstärker für drei Messdurchgänge.}
     \label{tab:wider_inv_lin}
 \end{table}
-Bei den Messdurchgänge werden, wie in Abschnitt \ref{sec:durchfuehrung} beschrieben, für verschiedenen Frequenzen die Phase zwischen Eingangsspannung $U_\text{in}$ und Ausgangsspannung $U_\text{out}$, sowie die Höhe der Ausgangsspannung gemessen.
+Bei den Messdurchgänge werden, wie in Abschnitt \ref{sec:durchfuerung} beschrieben, für verschiedenen Frequenzen die Phase zwischen Eingangsspannung $U_\text{in}$ und Ausgangsspannung $U_\text{out}$, sowie die Höhe der Ausgangsspannung gemessen.
 Danach wird aus dem Quotienten der Eingangsspannung und Ausgangsspannung die Verstärkung $V'$ nach Gleichung \ref{eq:ampli} berechnet.
 Die Verstärkung ist in Form eines doppelt logarithmischen Plots in Abbildung \ref{fig:inv_lin} zu sehen.
 \begin{figure}[H]
@@ -43,8 +56,8 @@ Die Verstärkung ist in Form eines doppelt logarithmischen Plots in Abbildung \r
         \includegraphics[width=\textwidth]{build/inv_lin_3.pdf}
         \subcaption{Messwerte der Messung 3.}
     \end{subfigure}
-    \caption{Die Messwerte der Verstärkung durch den invertierten Linearverstärkers. Es wird die Verstärkung gegen die Frequenz der Eingangsspannung geplottet.
-    Dies geschieht in einer Plot mit doppelt logarithmischer Achse. Ein Fit wird für den abfallenden Bereich angefertigt, welcher als blaue Linie zu erkennen ist.}
+    \caption{Die Messwerte der Verstärkung von dem invertierten Linearverstärker. Es wird die Verstärkung gegen die Frequenz der Eingangsspannung geplottet.
+    Dies geschieht in einem Plot mit doppelt logarithmischer Achse. Ein Fit wird für den abfallenden Bereich angefertigt, welcher als blaue Linie zu erkennen ist.}
     \label{fig:inv_lin}
 \end{figure}
 Die Ausgleichfunktion für die Messwerte wird mithilfe der Funktion
@@ -53,40 +66,41 @@ Die Ausgleichfunktion für die Messwerte wird mithilfe der Funktion
     \label{eq:fit}
 \end{equation}
 durchgeführt, wobei $f$ die Frequenz ist.
-Die Ausgleichrechung ergibt für die Parameter $a$ und $b$ der verschiedenen Messreiehen die Widerstände
+Die Ausgleichsrechung ergibt für die Parameter $a$ und $b$ der verschiedenen Messreihen die folgenden Fits
 \begin{align}
     Fit_1(f) &= \SI{6.9(28)e5}{\frac{\V}{\Hz}} f^{-\SI{1.02(4)}{}} \\
     Fit_2(f) &= \SI{5.7e8}{\frac{\V}{\Hz}} f^{-1.51}\\
     Fit_3(f) &= \SI{1.2e4}{\frac{\V}{\Hz}} f^{-0.68}
 \end{align}
-Aufgrund der doppelt logarithmischen Achsen und der geringen Anzahl von Messwerten im abfallenden Bereich, könne für Messung 2 und 3 durch die Funktion 'curve\_fit' des python Pakets 'scipy' \cite{scipy} keine Unsicherheiten bestimmt werden.
+Aufgrund der doppelt logarithmischen Achsen und der geringen Anzahl von Messwerten im abfallenden Bereich, können für Messung 2 und 3 durch die Funktion 'curve\_fit' des python Pakets 'scipy' \cite{scipy} keine Unsicherheiten bestimmt werden.
 Für den Plateubereich, welcher für geringe Frequenzen im invertierten Linearverstärker erkennbar ist wird der Mittelwert der Verstärkung berechnet.
 Bei der Berechnung der Mittelwerte werden dabei unterschiedlich viele Messwerte genutzt, je nachdem wie lang das Plateu bei der jeweiligen Konfiguration ist.
 In Tabelle \ref{tab:inv_lin_mittel} sind die berechneten Mittelwerte aufgetragen. 
 In der Tabelle sind zudem die Anzahl der genutzten Messpunkte der jeweiligen Messung, sowie die theoretische Verstärkung zu sehen.
-Die theoretische Verstärkung wird dabei nach Gleichung \eqref{eq:verstaerkung} berechnet.
+Die theoretische Verstärkung $V_\text{theo}'$ wird dabei nach Gleichung \eqref{eq:verstaerkung} berechnet.
 Zudem wird die Grenzfrequenz 
 \begin{equation*}
-  f_\text{Grenz} = \sqrt(V_\text{theo}')/a)**(1/b)
+  f_\text{Grenz} = \left(\sqrt{V_\text{theo}'}/a\right)^{(1/b)}
 \end{equation*}
-berechnet, wobei $V_\text{theo}'$ die nach Gleichung \eqref{eq:verstaerkung} berechnete Verstärkung für die gegebene Schaltung ist.
+berechnet.
 In der Tabelle ist außerdem das Bandbreitenprodukt
 \begin{equation*}
     B = f_\text{Grenz}\bar{V}'
 \end{equation*}
 aufgezeigt.
 \begin{table}
-    \centering
-    \resizebox*{\textwidth}{!}{%
-    \begin{tabular}{cccccc}
+    \hspace*{-2cm}\begin{tabular}{cccc}
         \toprule
-        Messung & Anzahl Messpunkte & Mittelwert $\bar{V}'$ & theoretische Verstärkung $V_\text{theo}'$ & Grenzfrequenz $f_\text{Grenz}$ & Bandbreitenprodukt $B$\\
+         & Messung 1 & Messung 2 & Messung 3\\
         \midrule
-        1 & 4 & $\SI{93.600(2100)}{}$ & 100 & $\SI{79763.77(5000)}{\Hz}$ & $\SI{74.77(5000)e5}{\Hz}$\\
-        2 & 8 & $\SI{2.080(0)}{} $& 2.126 & $\SI{166918.65}{\Hz} $& $\SI{3.47e5}{\Hz}$\\
-        3 & 7 & $\SI{4.680(50)}{} $& 4.680 &$\SI{50399.22}{\Hz}$ & $\SI{2.35(24)e5}{}$\\
+        Anzahl Messpunkte & 4 & 8 & 7 \\
+        Mittelwert $\bar{V}'$ & $\SI{93.600(2100)}{}$ &  $\SI{2.080(1)}{} $&  $\SI{4.680(50)}{} $ \\
+        theoretische Verstärkung $V_\text{theo}'$ & 100 & 2.126 & 4.680 \\
+        Grenzfrequenz $f_\text{Grenz}$ & $\SI{79.76(50)}{\kilo\Hz}$ & $\SI{166.91}{\kilo\Hz} $& $\SI{50.39}{\kilo\Hz}$  \\
+        Bandbreitenprodukt $B$ & $\SI{74.77(5000)e2}{\kilo\Hz}$ & $\SI{3.47(27)e2}{\kilo\Hz}$ & $\SI{2.35(24)e2}{\kilo\Hz}$ \\
         \bottomrule
-    \end{tabular}}
+    \end{tabular}
+    \caption{Die aufgenommen Messwerte und ihre theoretischen Pendants des invertierten Linearverstärkers.}
     \label{tab:inv_lin_mittel}
 \end{table} 
 Abgesehen von der Ausgangsspannung, aus der die Verstärkung berechnet wird, wird auch die Phase zwischen Eingangsspannung und Ausgangsspannung gemessen.
@@ -107,16 +121,16 @@ Die resultierenden Plots sind in Abbildung \ref{fig:phase} zu sehen.
         \includegraphics[width=\textwidth]{build/inv_lin_phase3.pdf}
         \subcaption{Messwerte der Messung 3.}
     \end{subfigure}
-    \caption{Die Messwerte der Phase zwischen Eingangsspannung und Ausgangsspannung beim invertierten Linearverstärkers. Die Phase wird gegen die Frequenz der Eingangsspannung geplottet.
-    Dies geschieht in einer Plot mit logarithmischer y-Achse.}
+    \caption{Die Messwerte der Phase zwischen Eingangsspannung und Ausgangsspannung beim invertierten Linearverstärker. Die Phase wird gegen die Frequenz der Eingangsspannung geplottet.
+    Dies geschieht in einem Plot mit logarithmischer x-Achse.}
     \label{fig:phase}
 \end{figure}
-In den Plots ist zu erkennen, dass es für kleine Frequenz ein Plateu für Phase $\approx 180\,\si{\degree}$ gibt.
-Bei höheren Frequenzen fällt die Phase exponentiell ab, bis diesem einen geringen Wert von $(0-40)\,\si{\degree}$ erreicht hat.
-
+In den Plots ist zu erkennen, dass es für kleine Frequenz ein Plateu beim Phasenwert $\approx 180\,\si{\degree}$ gibt.
+Bei höheren Frequenzen fällt die Phase exponentiell ab, bis diese einen geringen Wert von $(0-40)\,\si{\degree}$ erreicht hat.
+\FloatBarrier
 \subsection{Umkehr Integrator}
 Die nächste Schaltung die untersucht wird ist der Umkehr Integrator.
-Für diesen wird der Aufbau gemäß \ref{sec:durchfuehrung} umgebaut.
+Für diesen wird der Aufbau gemäß \ref{sec:durchfuerung} umgebaut.
 Daraufhin wird die Frequenz der Eingangsspannung varriert und die Ausgangsspannung gemessen.
 Diese wird in Abbildung \ref{fig:inv_int} gegen die Frequenz in einem doppelt logarithmischen Plot aufgetragen.
 Durch die Werte wird ein Fit gelegt welcher für die Funktion \eqref{eq:fit} angefertigt wird.
@@ -140,27 +154,27 @@ Die Bilder, welches das Oszilloskop produziert, können in Abbildung \ref{fig:um
     \centering
     \begin{subfigure}{0.49\linewidth}%
         \includegraphics[width=\textwidth]{data/Int_rechteck.png}
-        \subcaption{Das Eingangssignals ist eine Rechteckspannung, das Ausgangssignal eine Dreiecksspannung.}
+        \subcaption{Das Eingangssignal ist eine Rechteckspannung, das Ausgangssignal eine Dreiecksspannung.}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.49\linewidth}%
         \includegraphics[width=\textwidth]{data/int_dreieck.png}
-        \subcaption{Das Eingangssignals ist eine Dreiecksspannung, das Ausgangssignal ist eine Rechteckspannung.}
+        \subcaption{Das Eingangssignal ist eine Dreiecksspannung, das Ausgangssignal ist eine Sinusspannung.}
     \end{subfigure}\\
     \begin{subfigure}{0.49\linewidth}%
         \includegraphics[width=\textwidth]{data/int_sinus.png}
         \subcaption{Das Eingangssignal ist eine Sinusspannung, das Ausgangssignal ist ein Cosinussignal.}
     \end{subfigure}
-    \caption{Die Bildschirmfotos des Oszilloskop bei verschiedenen Eingangssignals und Ausgangssignalen.
-    Das gelbe Signal ist dabei immer das Eingangssignals des Umkehr Integrators, das grüne Signal ist das Ausgangssignal der Schaltung.}
+    \caption{Die Bildschirmfotos des Oszilloskop bei verschiedenen Eingangssignalen und Ausgangssignalen.
+    Das gelbe Signal ist dabei immer das Eingangssignal des Umkehr Integrators, das grüne Signal ist das Ausgangssignal der Schaltung.}
     \label{fig:umkehr_oszi}
 \end{figure}
 Die erwartete Eigenschaft des bilden der Stammfunktion des Eingangssignals ist zu erkennen.
-
+\FloatBarrier
 \subsection{invertierender-Differenzierer}
-Nun wird die Schaltung eines invertierenden-Differenzieres, wie in \ref{sec:durchfuehrung} beschrieben, aufgebaut.
+Nun wird die Schaltung eines invertierenden-Differenzieres, wie in \ref{sec:durchfuerung} beschrieben, aufgebaut.
 Bei dem Messvorgang wird genauso wie zuvor beim Umkehr Integrator vorgegangen.
-Die gemessene Ausgangsspannung wird wieder gegen die Frequenz in einem doppelt logarithmischen Plots aufgetragen, welcher in Abbildung \ref{fig:inv_dif} zu sehen ist.
+Die gemessene Ausgangsspannung wird wieder gegen die Frequenz in einem doppelt logarithmischen Plots aufgetragen, welcher in Abbildung \ref{fig:inv_diff} zu sehen ist.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{build/inv_diff.pdf}
@@ -170,28 +184,86 @@ Die gemessene Ausgangsspannung wird wieder gegen die Frequenz in einem doppelt l
 \end{figure}
 Es wird ein Fit nach Funktion \eqref{eq:fit} angefertigt, dieser ergibt sich zu 
 \begin{equation*}
-    Fit_5 = \SI{0.0058(22)}{\frac{\V}{\Hz}} f^{\SI{1.09(5)}{}}
+    Fit_5(f) = \SI{0.0058(22)}{\frac{\V}{\Hz}} f^{\SI{1.09(5)}{}}
 \end{equation*}
 und wird ebenfalls in der Abbildung \ref{fig:inv_diff} gezeigt.\\\\
 Um die Eigenschaft des invertierenden-Differenzieres besser zu untersuchen werden drei verschiedene Eingangssignale in die Schaltung gegeben.
 Die Eingangssignale und Ausgangssignale werden dann auf einem Oszilloskop dargestellt.
-Die entehenden Bilder können in Abbildung \ref{fig:dif_oszi} gesehen werden.
+Die entstehenden Bilder können in Abbildung \ref{fig:dif_oszi} gesehen werden.
 \begin{figure}
     \centering
     \begin{subfigure}{0.49\linewidth}%
         \includegraphics[width=\textwidth]{data/dif_rechteck.png}
-        \subcaption{Das Eingangssignals ist eine Rechteckspannung, das Ausgangssignal eine gedämpfte Schwingung.}
+        \subcaption{Das Eingangssignal ist eine Rechteckspannung, das Ausgangssignal eine gedämpfte Schwingung.}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.49\linewidth}%
         \includegraphics[width=\textwidth]{data/dif_dreieck.png}
-        \subcaption{Das Eingangssignals ist eine Dreiecksspannung, das Ausgangssignal ist eine Rechteckspannung überlagert mit einer gedämpften Schwingung.}
+        \subcaption{Das Eingangssignal ist eine Dreiecksspannung, das Ausgangssignal ist eine Rechteckspannung überlagert mit einer gedämpften Schwingung.}
     \end{subfigure}\\
-    \begin{subfigure}{0.49\linewidth}%
-        \includegraphics[width=\textwidth]{data/dif_sinus.png}
-        \subcaption{Das Eingangssignal ist eine Sinusspannung, das Ausgangssignal ist ein Cosinussignal.}
-    \end{subfigure}
-    \caption{Die Bildschirmfotos des Oszilloskop bei verschiedenen Eingangssignals und Ausgangssignalen.
-    Das gelbe Signal ist dabei immer das Eingangssignals des invertierenden-Differenzieres, das grüne Signal ist das Ausgangssignal der Schaltung.}
+    %\begin{subfigure}{0.49\linewidth}%
+    %    \includegraphics[width=\textwidth]{data/dif_sinus.png}
+    %    \subcaption{Das Eingangssignal ist eine Sinusspannung, das Ausgangssignal ist eine Rechteckspannung.}
+    %\end{subfigure}
+    \caption{Die Bildschirmfotos des Oszilloskop bei verschiedenen Eingangssignalen und Ausgangssignalen.
+    Das gelbe Signal ist dabei immer das Eingangssignal des invertierenden-Differenzieres, das grüne Signal ist das Ausgangssignal der Schaltung.}
     \label{fig:dif_oszi}
 \end{figure}
+\FloatBarrier
+\subsection{nicht-invertierenden-Schmitt-Trigger}
+Nun wird die Schaltung zu einem nicht-invertierenden-Schmitt-Trigger umgebaut.
+Dieser weist bei ein binäres Verhalten auf.
+Bei einer gewissen Eingangsspannung $U_\text{Schmitt}$, die auch Kippspannung genannt wird, erhöht sich die Ausgangsspannung des Schmitt-Triggers von $U_\text{out}= \SI{0}{\V}$ auf $U_\text{out}\approx \SI{30}{\V}$.
+Der gemessene Wert der Kippspannung liegt bei 
+\begin{align*}
+    U_\text{Schmitt} &= \SI{3.26(5)}{\V}
+\end{align*}
+wobei der theoretische Wert, bestimmt durch Gleichung \eqref{eq:schmitt} bei 
+\begin{align*}
+    U_\text{Schmitt,theo} &= \SI{2.91(5)}{\V}
+\end{align*}
+liegt.
+Die nötigen Werte für die Berechnung von $ U_\text{Schmitt,theo}$ werden dabei zuvor gemessen und ergeben sich zu
+\begin{align*}
+    R_1 &= \SI{100}{\kilo\ohm}\\
+    R_2 &= \SI{1000}{\kilo\ohm}\\
+    U_B &= \SI{29.10(5)}{\V} \, .
+\end{align*}
+An dem Punkt der Kippspannung wird ein Bild mit dem Oszilloskop aufgenommen, dieses ist in Abbildung \ref{fig:schmitt_oszi} zu sehen.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{data/schmitt.png}
+    \caption{Eine Aufnahme des Oszilloskops, wobei das Eingangssignal in den Schmitt-Trigger als gelbe Linie zu erkennen ist und das Ausgangssignal als grüne Linie.
+    Die Aufnahme wird an dem Punkt der Kippspannung aufgenommen, also gerade da, wo die Spannung des Schmitt-Triggers auf $U=\SI{29.1}{\V}$ steigt.}
+    \label{fig:schmitt_oszi}
+\end{figure}
+\FloatBarrier
+\subsection{Signalgenerator}
+Die letzte Schaltung die untersucht wird ist der Signalgenerator, welcher aus dem Schmitt-Trigger und dem invertierenden-Integrator besteht.
+Es werden die Frequenz $f_\text{gen}$ und Amplitude $U_\text{a,2}$ des Ausgangssignals gemessen.
+Zudem wird die Amplitude des Signals zwischen Schmitt-Trigger und Integrator $U_\text{a,1}$ gemessen.
+Die gemessenen Werte für eine Eingangsspannung von $U_\text{in} = \SI{5.30(5)}{\V}$ sind 
+\begin{align*}
+    U_\text{a,1} &= \SI{27.30(5)}{\V} \\
+    U_\text{a,2} &= \SI{5.20(5)}{\V} \\
+    f_\text{gen} &= \SI{1.61}{\kilo\Hz} \, .
+\end{align*}
+Die theoretische Werte für die Amplitude und Frequenz können Mithilfe von Gleichung \eqref{eq:generator_ampl} beziehungsweise \eqref{eq:generator_freq} berechnet werden.
+Diese ergeben die Zahlenwerte 
+\begin{align*}
+    U_\text{a,2,theo} &= \SI{2.77(5)}{\V} \\
+    f_\text{gen,theo} &= \SI{2.5}{\kilo\Hz} \, .
+\end{align*}
+Eine Aufnahme des Bildes vom Oszilloskop wird in Abbildung \ref{fig:gen_oszi} gezeigt.
+Dabei sind die dargestellten Signale, dass Signal zwischen Schmitt-Trigger und Integrator in grün und das Ausgangssignal des Signalgenerators in gelb zu sehen.
+Es ist zu erkennen, dass der Signalgenerator eine Dreiecksspannung erzeugt.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{data/generator.png}
+    \caption{Dargestellt werden das Signal zwischen Schmitt-Trigger und Integrator in grün, sowie das Ausgangssignal des Signalgenerators in gelb.
+    Das Bild wird mit einem Oszilloskop aufgenommen.}
+    \label{fig:gen_oszi}
+\end{figure}
+
+
+
