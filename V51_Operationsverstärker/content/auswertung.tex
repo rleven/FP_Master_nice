@@ -3,7 +3,20 @@
 In diesem Teil werden die Messwerte der verschiedenen Schlatungen vorgestellt und erläutert.
 Dabei wird in der Reihenfolge der Durchführung vorgegangen.
 \subsection{Fehlerrechung}
-
+Zur Fehlerrechnung werden die Fehlerpfortpflanzung nach Gauß
+\begin{equation}
+    \sigma_f = \sqrt{\left(\frac{\partial f}{\partial x}\right)^2 \sigma_x ^2 + \left( \frac{\partial f}{\partial y}\right)^2 \sigma_y ^2 + ...}
+\end{equation}
+genutzt.
+Die Standardabweichung des Mittelwerts wird nach
+\begin{equation}
+    \sigma_{\bar{x}} = \sqrt{\frac{1}{N(N-1)} \sum_{k=1}^N (x_k - \bar{x})^2}
+\end{equation}
+mit 
+\begin{equation}
+    \bar{x} = \frac{1}{N} \sum_{k=1} ^N x_k
+\end{equation}
+berechnet.
 \subsection{invertierter Linearverstärker}
 Als erste Schaltung wird der invertierter Linearverstärker aufgebaut.
 Der Aufbau wird in Abschnitt \ref{sec:durchfuehrung} im Detail erklärt.
@@ -76,15 +89,18 @@ In der Tabelle ist außerdem das Bandbreitenprodukt
 \end{equation*}
 aufgezeigt.
 \begin{table}
-    \begin{tabular}{cccccc}
+    \hspace*{-2cm}\begin{tabular}{cccc}
         \toprule
-        Messung & Anzahl Messpunkte & Mittelwert $\bar{V}'$ & theoretische Verstärkung $V_\text{theo}'$ & Grenzfrequenz $f_\text{Grenz}$ & Bandbreitenprodukt $B$\\
+         & Messung 1 & Messung 2 & Messung 3\\
         \midrule
-        1 & 4 & $\SI{93.600(2100)}{}$ & 100 & $\SI{79.76(50)}{\kilo\Hz}$ & $\SI{74.77(5000)e2}{\kilo\Hz}$\\
-        2 & 8 & $\SI{2.080(1)}{} $& 2.126 & $\SI{166.91}{\kilo\Hz} $& $\SI{3.47(27)e2}{\kilo\Hz}$\\
-        3 & 7 & $\SI{4.680(50)}{} $& 4.680 &$\SI{50.39}{\kilo\Hz}$ & $\SI{2.35(24)e2}{\kilo\Hz}$\\
-        \bottomrule 
+        Anzahl Messpunkte & 4 & 8 & 7 \\
+        Mittelwert $\bar{V}'$ & $\SI{93.600(2100)}{}$ &  $\SI{2.080(1)}{} $&  $\SI{4.680(50)}{} $ \\
+        theoretische Verstärkung $V_\text{theo}'$ & 100 & 2.126 & 4.680 \\
+        Grenzfrequenz $f_\text{Grenz}$ & $\SI{79.76(50)}{\kilo\Hz}$ & $\SI{166.91}{\kilo\Hz} $& $\SI{50.39}{\kilo\Hz}$  \\
+        Bandbreitenprodukt $B$ & $\SI{74.77(5000)e2}{\kilo\Hz}$ & $\SI{3.47(27)e2}{\kilo\Hz}$ & $\SI{2.35(24)e2}{\kilo\Hz}$ \\
+        \bottomrule
     \end{tabular}
+    \caption{Die aufgenommen Messwerte und ihre theoretischen Pendant des invertierten Linearverstärkers.}
     \label{tab:inv_lin_mittel}
 \end{table} 
 Abgesehen von der Ausgangsspannung, aus der die Verstärkung berechnet wird, wird auch die Phase zwischen Eingangsspannung und Ausgangsspannung gemessen.
