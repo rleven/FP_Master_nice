@@ -1,7 +1,7 @@
 \input{header.tex}
 
 \subject{V01}
-\title{Kosmische Myonen}
+\title{Lebensdauer kosmische Myonen}
 \date{%
   Durchführung: 13.\,Dezember 2022
   \hspace{2em}
@@ -23,5 +23,32 @@
 
 \newpage
 \printbibliography{}
+
+\newpage
+\appendix
+
+\begin{table}[H]
+  \centering
+  \caption{Daten zur Halbwertsbreite bei verschiedenen Verzögerungen}
+  \resizebox{!}{10cm}{%
+  \csvreader[tabular=c|c|c,
+  head=false, 
+  table head= Verzögerung der Leitung 1 in \si{\nano\second} & Verzögerung der Leitung 2 in \si{\nano\second} & counts pro \SI{10}{\second} \\\midrule,
+  late after line= \\]
+  {data/delayline.csv}{1=\eins, 2=\zwei, 3=\drei}{$\num{\eins}$ & $\num{\zwei}$ & $\num{\drei}$}}
+  \label{tab:fwhm}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \caption{Daten zur Bestimmung der Lebenszeiten pro Kanal}
+  \resizebox{!}{5cm}{%
+  \csvreader[tabular=c|c,
+  head=false, 
+  table head= Kanalnummer & Pulsabstand in \si{\micro\second} \\\midrule,
+  late after line= \\]
+  {data/marker2.csv}{1=\eins, 2=\zwei}{$\num{\eins}$ & $\num{\zwei}$}}
+  \label{tab:linear}
+\end{table}
 
 \end{document}
