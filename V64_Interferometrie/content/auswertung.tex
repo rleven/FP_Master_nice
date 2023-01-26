@@ -22,9 +22,9 @@ Alle weiteren Messwerte werden mit dieser Polfilter Einstellung vorgenommen.
 \subsection{Brechungsindex von Glas}
 Um nun den Brechungsindex von Glas zu bestimmen werden die zwei Glasplättchen die im Strahlengang stehen zu einander verkippt.
 Anders als zuvor stehen sie also nicht so, dass immer der maximale beziehungsweise minimale Kontrast gemessen wird.
-Die Verkippung gelingt durch die Montierung der Glasplättchen auf einer Rotationshalter.
+Die Verkippung gelingt durch die Montierung der Glasplättchen auf einem Rotationshalter.
 Dieser bewegt sich von $(0-10)\,\si{\degree}$.
-Es wird nun die Anzahl an Maxima durchläufen des Kontrasts gemessen.
+Es wird nun die Anzahl an Maxima Durchläufen des Kontrasts gemessen.
 Die Messung wird zehn mal wiederholt, sodass sich die Durchlaufsanzahlen der Tabelle \ref{tab:counts_glas} ergeben.
 \begin{table}
     \centering
@@ -35,7 +35,7 @@ Die Messung wird zehn mal wiederholt, sodass sich die Durchlaufsanzahlen der Tab
         Anzahl &34 & 34& 35& 35& 33& 35& 35& 34& 35& 34\\
         \bottomrule
     \end{tabular}
-    \caption{Die gemessenen Maximasdurchläufe des Kontrast wenn die Glasplättchen um $\SI{10}{\degree}$ verdreht werden.}
+    \caption{Die gemessenen Maximadurchläufe des Kontrast wenn die Glasplättchen um $\SI{10}{\degree}$ verdreht werden.}
     \label{tab:counts_glas}
 \end{table}
 Aus der Anzahl der Durchläufe kann nun der Brechungsindex von Glas mithilfe von Gleichung \eqref{eq:glas} bestimmt werden.
@@ -49,19 +49,20 @@ Dabei wird der Brechungsindex für jede Messung erst einzelnd berechnet, wodurch
         Brechungsindex &1.546&1.546&1.571&1.571&1.521&1.571& 1.5714&1.5462&1.571& 1.546\\
         \bottomrule
     \end{tabular}
-    \caption{Die gemessenen Maximasdurchläufe des Kontrast wenn die Glasplättchen um $\SI{10}{\degree}$ verdreht werden.}
+    \caption{Die gemessenen Maximadurchläufe des Kontrast wenn die Glasplättchen um $\SI{10}{\degree}$ verdreht werden.}
     \label{tab:n_glas}
 \end{table}
+\FloatBarrier\noindent
 Anschließend werden die Brechungsindizes gemittelt, wodurch sich der Wert 
-\begin{align}
+\begin{align*}
     n_\text{Glas} &= \SI{1.556(17)}{}
-\end{align}
+\end{align*}
 ergibt.
 \subsection{Brechungsindex von Raumluft}
 Es wird nun der Glasplättchenhalter aus dem Versuchsaufbau ausgebaut und durch eine Gaszelle ersetzt.
-Diese steht so, dass sie nur durch einen Strahl durchlaufen wird.
+Diese steht so, dass sie nur von einen Strahl durchlaufen wird.
 In der Gaszelle befindet sich zunächst ein niedriger Gasdurck, welcher durch langsames hinzugeben von Raumluft bis auf $~\SI{1}{\bar}$ gebracht wird.
-Während des Befüllen der Gaszelle wird die Anzahl der Maximasdurchläufe des Kontrasts des Interferometers gemessen.
+Während des Befüllen der Gaszelle wird die Anzahl der Maximadurchläufe des Kontrasts des Interferometers gemessen.
 Die Anzahl wird dabei alle $\SI{50}{\milli\bar}$ aufgenommen.
 Die Messung wird drei Mal wiederholt, sodass sich die Messwerte in Tabelle \ref{tab:gas_counts} ergeben.
 \begin{table}
@@ -94,12 +95,12 @@ Die Messung wird drei Mal wiederholt, sodass sich die Messwerte in Tabelle \ref{
         950&     41&  41&  40\\
         \bottomrule
     \end{tabular}
-    \caption{Die gemessenen Maximasdurchläufe des Kontrast wenn die Gaszelle in $\SI{50}{\milli\bar}$ Schritten gefüllt wird.}
+    \caption{Die gemessenen Maximadurchläufe des Kontrast wenn die Gaszelle in $\SI{50}{\milli\bar}$ Schritten gefüllt wird.}
     \label{tab:gas_counts}
 \end{table}
 \FloatBarrier
 Aus den Messwerten der Tabelle \ref{tab:gas_counts} kann nun der Brechungsindex von Raumluft bestimmt werden.
-Dafür werden aus den Anzahl an Maximasdurchläufen zunächst die Brechungsindizes von Gas mithilfe von Gleichung \eqref{eq:n_glas} bestimmt.
+Dafür werden aus den Anzahl an Maximadurchläufen zunächst die Brechungsindizes von Gas mithilfe von Gleichung \eqref{eq:n_glas} bestimmt.
 Diese Brechungsindizes pro Gasdruck werden gegeneinader aufgetragen und sind in Abbildung \ref{fig:n_glass} zu sehen.
 \begin{figure}
     \centering 
