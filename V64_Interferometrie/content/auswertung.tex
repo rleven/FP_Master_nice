@@ -4,7 +4,7 @@
 
 Dieser Teil des Protokolls beschäftigt sich mit der Auswertung der zuvor beschriebenen Versuchsteile.
 Dabei soll der Brechungsindex von Glas, sowie von Raumluft bestimmt werden.\\\\
-Wie im Abschnitt \ref{sec:durchfuehrung} beschrieben wird, soll zunächst der größt mögliche Kontrast bestimmt werden.
+Wie im Abschnitt \ref{sec:durchfuehrung} beschrieben wird, soll zunächst der größte mögliche Kontrast bestimmt werden.
 Dafür wird der Polfilter in $\SI{10}{\degree}$ Schritten rotiert.
 Bei jedem Schritt werden die Intensität der beiden zueinander gegenseitig polarisierten Laserstrahlen gemessen.
 Aus den Intensität wird anschließend der Kontrast, durch Gleichung \eqref{eq:kontrast} berechnet.
@@ -13,11 +13,11 @@ Die Messwerte werden danach gegeneinader aufgetragen, das Ergebnis ist in Abbild
     \centering
     \includegraphics[width=\textwidth]{build/Kontrast.pdf}
     \caption{Der berechnete Kontrast zu den Einestellungen des Polfilter in einem $\SI{180}{\degree}$ Bereich.
-    Der maximal erreicht Kontrast wird mit einem roten Kreuz makiert.}
+    Der maximal erreicht Kontrast wird mit einem roten Kreuz markiert.}
     \label{fig:Kontrast}
 \end{figure}
-Der maximal erreichte Kontrast wird mit einem roten Kreuz makiert.
-Dieser liegt bei einem Winekel von $\SI{50}{\degree}$, welches einem Kontrast von $0.938$ entspricht.
+Der maximal erreichte Kontrast wird mit einem roten Kreuz markiert.
+Dieser liegt bei einem Winkel von $\SI{50}{\degree}$, welches einem Kontrast von $0.938$ entspricht.
 Alle weiteren Messwerte werden mit dieser Polfilter Einstellung vorgenommen.
 \subsection{Brechungsindex von Glas}
 Um nun den Brechungsindex von Glas zu bestimmen werden die zwei Glasplättchen die im Strahlengang stehen zu einander verkippt.
@@ -38,8 +38,8 @@ Die Messung wird zehn mal wiederholt, sodass sich die Durchlaufsanzahlen der Tab
     \caption{Die gemessenen Maximadurchläufe des Kontrast wenn die Glasplättchen um $\SI{10}{\degree}$ verdreht werden.}
     \label{tab:counts_glas}
 \end{table}
-Aus der Anzahl der Durchläufe kann nun der Brechungsindex von Glas mithilfe von Gleichung \eqref{eq:glas} bestimmt werden.
-Dabei wird der Brechungsindex für jede Messung erst einzelnd berechnet, wodurch sich die Brechungsindizes der Tabelle \ref{tab:n_glas} ergeben.
+Aus der Anzahl der Durchläufe kann nun der Brechungsindex von Glas mithilfe von Gleichung \eqref{eq:brechungsindex} bestimmt werden.
+Dabei wird der Brechungsindex für jede Messung erst einzeln berechnet, wodurch sich die Brechungsindizes der Tabelle \ref{tab:n_glas} ergeben.
 \begin{table}
     \hspace*{-1cm}
     \begin{tabular}{ccccccccccc}
@@ -61,7 +61,7 @@ ergibt.
 \subsection{Brechungsindex von Raumluft}
 Es wird nun der Glasplättchenhalter aus dem Versuchsaufbau ausgebaut und durch eine Gaszelle ersetzt.
 Diese steht so, dass sie nur von einen Strahl durchlaufen wird.
-In der Gaszelle befindet sich zunächst ein niedriger Gasdurck, welcher durch langsames hinzugeben von Raumluft bis auf $~\SI{1}{\bar}$ gebracht wird.
+In der Gaszelle befindet sich zunächst ein niedriger Gasdruck, welcher durch langsames hinzugeben von Raumluft bis auf $~\SI{1}{\bar}$ gebracht wird.
 Während des Befüllen der Gaszelle wird die Anzahl der Maximadurchläufe des Kontrasts des Interferometers gemessen.
 Die Anzahl wird dabei alle $\SI{50}{\milli\bar}$ aufgenommen.
 Die Messung wird drei Mal wiederholt, sodass sich die Messwerte in Tabelle \ref{tab:gas_counts} ergeben.
@@ -100,7 +100,7 @@ Die Messung wird drei Mal wiederholt, sodass sich die Messwerte in Tabelle \ref{
 \end{table}
 \FloatBarrier
 Aus den Messwerten der Tabelle \ref{tab:gas_counts} kann nun der Brechungsindex von Raumluft bestimmt werden.
-Dafür werden aus den Anzahl an Maximadurchläufen zunächst die Brechungsindizes von Gas mithilfe von Gleichung \eqref{eq:n_glas} bestimmt.
+Dafür werden aus den Anzahl an Maximadurchläufen zunächst die Brechungsindizes von Gas mithilfe von Gleichung \eqref{eq:gasphase} bestimmt.
 Diese Brechungsindizes pro Gasdruck werden gegeneinader aufgetragen und sind in Abbildung \ref{fig:n_glass} zu sehen.
 \begin{figure}
     \centering 
@@ -110,12 +110,8 @@ Diese Brechungsindizes pro Gasdruck werden gegeneinader aufgetragen und sind in 
     Die entsprechenden Fits sind ebenfalls in der Abbildung zu sehen.}
     \label{fig:n_glass}
 \end{figure}
-Es wird für jede Messreihe ein Ausgleichsrechnung mithilfe der Funktion
-\begin{equation*}
-    n(A,p) =  \sqrt{1 + \frac{3Ap}{RT}}
-\end{equation*}
-durchgeführt.
-Dabei ist $p$ der Druck, $R$ die allgemeine Gaskonstante und $T=\SI{19.2}{\celsius}$ die Raumtemperatur.
+Es wird für jede Messreihe ein Ausgleichsrechnung mithilfe \autoref{eq:lorentz} durchgeführt.
+Dabei ist $T=\SI{19.2}{\celsius}$ die Raumtemperatur.
 Der gesuchte Parameter $A$ wird dabei für jede Messreihe bestimmt, sodass sich folgende Parameter ergeben
 \begin{align*}
     A_1 &= \SI{4.468(19)e-6}{\frac{\cubic\meter}{\mol}} \\
