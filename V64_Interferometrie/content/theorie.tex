@@ -17,7 +17,7 @@ Für die Kohärenzzeit $\tau_c$ gilt:
     \tau_c = \frac{1}{\Delta \nu} \qquad \text{mit} \qquad \Delta \nu \equiv \text{Bandbreite des Lichts}
 \end{equation}
 \newline
-Bei räumlicher Kohärenz hat die Lichtwelle zum gleichen Zeitpunkt an verschiedenen Orten die selbe Amplitude.\\
+Bei räumlicher Kohärenz hat die Lichtwelle zum gleichen Zeitpunkt an verschiedenen Orten dieselbe Amplitude.\\
 In \autoref{fig:coherencea} und \ref{fig:coherenceb} wird graphisch der Unterschied zwischen zeitlicher und räumlicher Kohärenz dargestellt.
 
 \begin{figure}[H]
@@ -39,10 +39,10 @@ Zusätzlich zur Kohärenzzeit lässt sich die Kohärenz auch mit einem Kontrast 
 Bei maximalem Kontrast ist das Licht vollständig kohärent, bei Minimalem vollständig inkohärent.
 Der Kontrast berechnet sich aus den Intensitäten des Lichts und dem Kohärenzgrad
 \begin{equation}
-    \Gamma = \langle E_1 E_2^\dagger \rangle \quad \text{,} \quad \gamma = \frac{\Gamma}{\sqrt{I_1 I_2}}
+    \Gamma = \langle E_1 E_2^\dagger \rangle \quad \text{,} \quad \gamma = \frac{\Gamma}{\sqrt{I_1 I_2}},
     \label{eq:grad}
 \end{equation}
-, und es gilt:
+und es gilt:
 \begin{equation}
     V = \frac{2\sqrt{I_1I_2}}{I_1 + I_2}|\gamma|
     \label{eq:kontrast_formel}
@@ -52,7 +52,7 @@ Wird vollständig kohärentes Licht angenommen, gilt für den Kontrast auch \aut
     V = \frac{I_{\text{max}} - I_{\text{min}}}{I_{\text{max}} + I_{\text{min}}}
     \label{eq:kontrast}
 \end{equation}
-Vollständig kohärentes Licht ist nur theoretisch, da Lichtquellen nicht eindeutig monochromatisch leuchten.
+Vollständig kohärentes Licht ist praktisch nicht umsetzbar, da Lichtquellen nicht eindeutig monochromatisch leuchten.
 Da es nur teilmonochromatisches Licht gibt, gibt es dahingehend auch nur Teilkohärenz.
 
 \subsection{Fresnel-Arago-Gesetze}
@@ -65,17 +65,17 @@ Sie lauten zusammengefasst:
     \item Zwei linear polarisierte Lichtstrahlen mit zueinander parallelen Polarisationsebenen, interferieren wie nicht polarisiertes Licht.
     \item Zwei linear polarisierte Lichtstrahlen mit zueinander senkrechten Polarisationsebenen, interferieren nicht.
     \item Zwei zueinander senkrecht linear polarisierte Lichtstrahlen, interferieren nur dann, wenn sie aus einem Strahl kamen und erneut zu einem Strahl mit selber Polarisationsebene zusammengeführt werden.
-    \item Zwei zueinander senkrecht linear polarisierte Lichtstrahlen, interferieren bei Zusammenführung nicht, wenn sie aus nicht polarisiertem Licht entstanden sind.
+    \item Zwei zueinander senkrecht linear polarisierte Lichtstrahlen, interferieren bei Zusammenführung nicht, wenn sie aus nicht polarisiertem Licht entstanden sind.\cite{fresnel}
 \end{itemize}
 
 \subsection{Intensitäten und Interferenzbild}
 Um den Kontrast theoretisch zu berechnen, müssen die Intensitäten $I_{\text{max,min}}$ bekannt sein.
-Sie sind definiert als benachbarte Intensitäten der konstruktiven und destruktiven Interferenz und werden approximiert durch
+Sie sind definiert als benachbarte Intensitäten der konstruktiven und destruktiven Interferenz und werden bestimmt durch
 \begin{equation}
-    I_{\text{max,min}} \propto I_{\text{Laser}}\left[1 \pm 2\cos\left(\phi\right)\sin\left(\phi\right)\right]
+    I_{\text{max,min}} \propto I_{\text{Laser}}\left[1 \pm 2\cos\left(\phi\right)\sin\left(\phi\right)\right],
     \label{eq:intense}
 \end{equation}
-, wobei $I_{\text{Laser}}$ die mittlere Ausgangsintensität des He-Ne Lasers und $\phi$ der Winkel des Polarisationsfilters vor dem Interferometer ist.
+wobei $I_{\text{Laser}}$ die mittlere Ausgangsintensität des He-Ne Lasers und $\phi$ der Winkel des Polarisationsfilters vor dem Interferometer ist.
 \autoref{eq:intense} kann aus der Beziehung
 \begin{equation}
     I \propto <|E_1\cos\left(\omega t\right) + E_2\cos\left(\omega t + \delta\right)|^2>
@@ -95,9 +95,9 @@ Die Abhängigkeit des Kontrasts vom Polarisationswinkel ist gegeben durch
 und kann ermittelt werden, indem \autoref{eq:intense} in \autoref{eq:kontrast} eingesetzt wird.\\
 \autoref{eq:abhang} zeigt auf, dass der Kontrast für die Polarisationswinkel $\phi = \SI{45}{\degree}$ und $\phi = \SI{135}{\degree}$ maximal ist.\\
 \newline
-Das Interferenzbild wird untersucht, um das Interferometer zu justieren.
+Für die Justage des Interferometers, wird das Interfernzbild betrachtet.
 Sind mehrere Interferenzstreifen zu erkennen, also mehrere Intensitätsmaxima und -minima als Streifen im Bild, so ist das Interometer nicht korrekt justiert.
-Das Interferenzbild soll vollständig ein Intensitätsmaxima beziehungsweise ein Intensitätsminima ergeben, für die korrekte Ausführung, der in \autoref{sec:durchfuehrung} beschriebenen Schritte.\\
+Das Interferenzbild soll vollständig ein Intensitätsmaximum beziehungsweise ein Intensitätsminimum ergeben, für die korrekte Ausführung, der in \autoref{sec:durchfuehrung} beschriebenen Schritte.\\
 Die Detektion der Intensitäten erfolgt mittels zwei Photodioden, dessen Differenz genutzt wird, um klare Nulldurchgänge des Signals zu messen.
 Die Differenz bei Übergängen eines Maximums zu einem Minimum ist hoch, sodass diese genauer ist als die Analyse von den einzelnen Signalen.
 
@@ -119,7 +119,7 @@ Für die Anzahl der Intensitätsmaxima und -Minima gilt
     \label{eq:brechungint}
 \end{equation}
 Hierbei ist $T = \SI{1}{\milli\metre}$ die Dicke der Glasplatte, $\lambda_{\text{vac}}$ die Wellenlänge im Vakuum und $n$ der Brechungsindex.\\
-Im Strahlengang des Interferometers sind für je einen Strahl ein Glasplättchen verbaut, sodass insgesamt zwei in der Halterung verbaut sind.
+Im Strahlengang des Interferometers ist für je einen Strahl ein Glasplättchen verbaut, sodass insgesamt zwei in der Halterung verbaut sind.
 Zusätzlich sind die Plättchen um $\Theta_0 = \pm \SI{10}{\degree}$ angewinkelt, also $+\SI{10}{\degree}$ für den einen Strahl und $-\SI{10}{\degree}$ für den anderen.
 Daher gilt für die zwei separaten Drehwinkel:
 \begin{equation}
