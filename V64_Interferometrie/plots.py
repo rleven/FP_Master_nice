@@ -93,7 +93,7 @@ p = p*10**(2) #pascal
 def n_func(counts):
     return (counts*lambda_0)/L+1
 
-def lorentz(p, A):
+def lorentz(p, A, T=19.2+273.15):
     R = 8.31446261815324 #SI
     return (1 + 3*A*p/(R*T))**(1/2)
 
@@ -102,7 +102,7 @@ def lorentz(p, A):
 counts = [counts1, counts2, counts3]
 
 plt.figure()
-
+A_fit_mean = np.array([])
 p_lin = np.linspace(np.min(p), np.max(p), 10000)
 n_mess = unumpy.uarray(np.zeros(3), np.zeros(3))
 for i in range(3):
@@ -117,12 +117,16 @@ for i in range(3):
     print('Brechungsindex bei Normaldruck für Messung ' + str(i) +'\,', lorentz(100000, A_fit))
     plt.plot(p,n_luft1_n, 'bx', label = 'n der Messung ' + str(i+1))
     plt.plot(p_lin,lorentz(p_lin, unumpy.nominal_values(A_fit)), label = 'Fit, Messung ' + str(i+1))
-    
+    A_fit_mean = A_fit_mean.append(A_fit)
     plt.legend()
     plt.xlabel('Druck / ' + r'$\mathrm{Pa}$')
     plt.ylabel('Brechungsindex n')
 
 plt.savefig("build/Gas.pdf")
+
+A = np.mean(A_fit_mean)
+normaldruck = lorentz(100000, A, T=21+273.15) #normalatmosspähre?
+
 
 print('Mittelwert der drei Messungen: ', np.mean(n_mess) )
 
