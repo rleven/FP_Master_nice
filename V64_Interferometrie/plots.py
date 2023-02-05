@@ -107,6 +107,7 @@ p_lin = np.linspace(np.min(p), np.max(p), 10000)
 n_mess = unumpy.uarray(np.zeros(3), np.zeros(3))
 for i in range(3):
     n_luft1 = n_func(counts[i])
+    print(n_luft1)
     n_luft1_n = unumpy.nominal_values(n_luft1)
 
     params, cov = curve_fit(lorentz,p,np.array(n_luft1_n))
