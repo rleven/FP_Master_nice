@@ -6,19 +6,32 @@ Dieser Teil des Protokolls beschäftigt sich mit der Auswertung der zuvor beschr
 Dabei soll der Brechungsindex von Glas, sowie von Raumluft bestimmt werden.\\\\
 Wie im Abschnitt \ref{sec:durchfuehrung} beschrieben wird, soll zunächst der größte mögliche Kontrast bestimmt werden.
 Dafür wird der Polfilter in $\SI{10}{\degree}$ Schritten rotiert.
-Bei jedem Schritt werden die Intensität der beiden zueinander gegenseitig polarisierten Laserstrahlen gemessen.
-Aus den Intensität wird anschließend der Kontrast, durch Gleichung \eqref{eq:kontrast} berechnet.
+Bei jedem Schritt werden die Intensitäten der beiden zueinander gegenseitig polarisierten Laserstrahlen gemessen.
+Aus den Intensitäten wird anschließend der Kontrast, durch Gleichung \eqref{eq:kontrast} berechnet.
 Die Messwerte werden danach gegeneinader aufgetragen, das Ergebnis ist in Abbildung \ref{fig:Kontrast} zu sehen.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{build/Kontrast.pdf}
     \caption{Der berechnete Kontrast zu den Einestellungen des Polfilter in einem $\SI{180}{\degree}$ Bereich.
-    Der maximal erreicht Kontrast wird mit einem roten Kreuz markiert.}
+    Der maximal erreicht Kontrast wird mit einem roten Kreuz markiert.
+    Es wird zudem ein Fit für die Messwerte angefertigt.}
     \label{fig:Kontrast}
 \end{figure}
 Der maximal erreichte Kontrast wird mit einem roten Kreuz markiert.
 Dieser liegt bei einem Winkel von $\SI{50}{\degree}$, welches einem Kontrast von $0.938$ entspricht.
 Alle weiteren Messwerte werden mit dieser Polfilter Einstellung vorgenommen.
+Zudem wird mithilfe von Gleichung \eqref{eq:intense} ein Fit für die Messwerte angefertigt.
+Dabei wird die Gleichung in der Form 
+\begin{equation*}
+    Kontrast =  A\cdot |(\cos(\phi)\cdot \sin(\phi))|
+\end{equation*}
+genutzt.
+Der zu bestimmende Parameter $A$ wird mithilfe der Python Funktion \textit{curvefit} \cite{scipy} betsimmt.
+Dieser ergibt sich zu 
+\begin{align*}
+    A = \SI{1.82(4)}{}
+\end{align*}
+wobei die Unsicherheit beim Erstellen des Plots vernachlässigt wird.
 \subsection{Brechungsindex von Glas}
 Um nun den Brechungsindex von Glas zu bestimmen werden die zwei Glasplättchen die im Strahlengang stehen zu einander verkippt.
 Anders als zuvor stehen sie also nicht so, dass immer der maximale beziehungsweise minimale Kontrast gemessen wird.
@@ -55,43 +68,46 @@ In der Gaszelle befindet sich zunächst ein niedriger Gasdruck, welcher durch la
 Während des Befüllen der Gaszelle wird die Anzahl der Maximadurchläufe des Kontrasts des Interferometers gemessen.
 Die Anzahl wird dabei alle $\SI{50}{\milli\bar}$ aufgenommen.
 Die Messung wird drei Mal wiederholt, sodass sich die Messwerte in Tabelle \ref{tab:gas_counts} ergeben.
+\begin{landscape}
 \begin{table}
     \centering
-    \sisetup{table-format=2}
-    \begin{tabular}{S[table-format=3] S S S}
+    \sisetup{table-format=1.7}
+    \begin{tabular}{S[table-format=3] S[table-format=2] S @{${}\pm{}$} S S[table-format=2] S @{${}\pm{}$} S S[table-format=2] S @{${}\pm{}$} S}
         \toprule
-         & \multicolumn{3}{c}{Anzahl der Maxima} \\
-        \cmidrule(lr){2-4}
-        {Druck$ /\,\si{\milli\bar}$} & {Messung 1} & {Messung 2} & {Messung 3}\\
-        \midrule
-        50 &     2&   2&   2\\                         
-        100&     4&   4&   4\\
-        150&     6&   6&   6\\
-        200&     8&   8&   8\\
-        250&     10&  10&  10\\
-        300&     13&  12&  12\\
-        350&     15&  14&  14\\
-        400&     18&  16&  16\\
-        450&     20&  19&  19\\
-        500&     22&  21&  21\\
-        550&     24&  23&  23\\
-        600&     26&  25&  25\\
-        650&     28&  27&  27\\
-        700&     30&  29&  29\\
-        750&     33&  31&  31\\
-        800&     35&  33&  33\\
-        850&     38&  36&  36\\
-        900&     39&  38&  38\\
-        950&     41&  41&  40\\
+         & \multicolumn{3}{c}{Messung 1} & \multicolumn{3}{c}{Messung 2} & \multicolumn{3}{c}{Messung 3}\\
+        \cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+        {Druck$ /\,\si{\milli\bar}$} & {Messung 1} & {$n_1$} & {Unsicherheit} &  {Messung 2} & {$n_2 $} & {Unsicherheit} & {Messung 3} & {$n_3$} & {Unsicherheit} \\
+        \midrule 
+        50 &     2&  1.0000126 & 0.0000018   &  2 &  1.0000126 & 0.0000012 &   2 &    1.0000126 & 0.0000012 \\                         
+        100&     4&  1.0000253 & 0.0000011   &  4 &  1.0000253 & 0.0000025 &   4 &    1.0000253 & 0.0000025 \\
+        150&     6&  1.0000379 & 0.0000019   &  6 &  1.0000379 & 0.0000037 &   6 &    1.0000379 & 0.0000037 \\
+        200&     8&  1.0000506 & 0.0000015   &  8 &  1.0000506 & 0.0000050 &   8 &    1.0000506 & 0.0000050 \\
+        250&     10& 1.0000632 & 0.0000012   & 10 &  1.0000632 & 0.0000013 &  10 &    1.0000632 & 0.0000063 \\
+        300&     13& 1.0000822 & 0.0000012   & 12 &  1.0000759 & 0.0000075 &  12 &    1.0000759 & 0.0000075 \\
+        350&     15& 1.0000949 & 0.0000014   & 14 &  1.0000886 & 0.0000088 &  14 &    1.0000886 & 0.0000088 \\
+        400&     18& 1.0001139 & 0.0000019   & 16 &  1.0001012 & 0.0000010 &  16 &    1.0001012 & 0.0000010 \\
+        450&     20& 1.0001265 & 0.0000026   & 19 &  1.0001202 & 0.0000012 &  19 &    1.0001202 & 0.0000012 \\
+        500&     22& 1.0001392 & 0.0000013   & 21 &  1.0001329 & 0.0000013 &  21 &    1.0001329 & 0.0000013 \\
+        550&     24& 1.0001519 & 0.0000015   & 23 &  1.0001455 & 0.0000014 &  23 &    1.0001455 & 0.0000014 \\
+        600&     26& 1.0001645 & 0.0000016   & 25 &  1.0001582 & 0.0000015 &  25 &    1.0001582 & 0.0000015 \\
+        650&     28& 1.0001772 & 0.0000017   & 27 &  1.0001709 & 0.0000017 &  27 &    1.0001709 & 0.0000017 \\
+        700&     30& 1.0001898 & 0.0000018   & 29 &  1.0001835 & 0.0000018 &  29 &    1.0001835 & 0.0000018 \\
+        750&     33& 1.0002088 & 0.0000020   & 31 &  1.0001962 & 0.0000019 &  31 &    1.0001962 & 0.0000019 \\
+        800&     35& 1.0002215 & 0.0000022   & 33 &  1.0002088 & 0.0000020 &  33 &    1.0002088 & 0.0000020 \\
+        850&     38& 1.0002405 & 0.0000024   & 36 &  1.0002278 & 0.0000022 &  36 &    1.0002278 & 0.0000022 \\
+        900&     39& 1.0002468 & 0.0000024   & 38 &  1.0002405 & 0.0000024 &  38 &    1.0002405 & 0.0000024 \\
+        950&     41& 1.0002595 & 0.0000025   & 41 &  1.0002595 & 0.0000025 &  40 &    1.0002531 & 0.0000025 \\
         \bottomrule
     \end{tabular}
-    \caption{Die gemessenen Maximadurchläufe des Kontrast wenn die Gaszelle in $\SI{50}{\milli\bar}$ Schritten gefüllt wird.}
+    \caption{Die gemessenen Maximadurchläufe des Kontrast wenn die Gaszelle in $\SI{50}{\milli\bar}$ Schritten gefüllt wird. Zu jeder Messung wird der berechnete Brechungsindex der jeweiligen Durchlaufsnummer aufgezeigt.}
     \label{tab:gas_counts}
 \end{table}
+\end{landscape}
 \FloatBarrier
 Aus den Messwerten der Tabelle \ref{tab:gas_counts} kann nun der Brechungsindex von Raumluft bestimmt werden.
 Dafür werden aus den Anzahl an Maximadurchläufen zunächst die Brechungsindizes von Gas mithilfe von Gleichung \eqref{eq:gasphase} bestimmt.
 Diese Brechungsindizes pro Gasdruck werden gegeneinader aufgetragen und sind in Abbildung \ref{fig:n_glass} zu sehen.
+Die genauen Zahlenwerte des Brechungsindex zu jeder Durchlaufsanzahl ist zudem in der Tabelle \ref{tab:gas_counts} zu finden.
 \begin{figure}
     \centering 
     \includegraphics[width=0.7\textwidth]{build/Gas.pdf}
@@ -122,3 +138,10 @@ So ergibt sich im Mittel der drei Messungen der Brechungsindex
     \bar{n}_\text{Luft} &= \SI{1.0002681(07)}{}
 \end{align*}
 für die Raumluft bei Normaldruck und einer Temperatur von $T=\SI{19.2}{\celsius}$.
+Anschließend wird der Mittelwert des Parameters $A$ genutzt um mithilfe von Gleichung \eqref{eq:lorentz} der Brechungsindex für Normatmosphäre zu berechnen.
+Es werden also für den Druck $p=\SI{101325}{\Pa}$ und die Temperatur $T=\SI{15}{\celsius}$ eingesetzt.
+So ergibt sich ein Brechungsindex von 
+\begin{align*}
+    n_\text{Luft, Normal} = \SI{1.0002756(7)}{}
+\end{align*}
+für Luft bei Normatmosphäre.

@@ -22,9 +22,24 @@ maxi = np.argwhere(Kontrast(data[:,1], data[:,2]) == np.max(Kontrast(data[:,1], 
 print(maxi[0])
 print(np.max(Kontrast(data[:,1], data[:,2])))
 
+phi_rad = np.radians(data[:,0])
+
+def Delta_phi(phi,A):
+    return A*np.abs(np.cos(phi)*np.sin(phi))
+
+
+Kontrast1 = Kontrast(data[:,1], data[:,2])
+params, cov = curve_fit(Delta_phi,phi_rad,Kontrast1)
+phi_rad_lin = np.linspace(0,np.pi,1000)
+
+A_fit = un.ufloat(params,np.absolute(cov)**0.5)
+print('Fit Kontrast: ', A_fit)
+
+
 plt.figure()
 plt.plot(data[:,0], Kontrast(data[:,1], data[:,2]),'k.', label='Kontrast')
 plt.plot(data[maxi[0],0], np.max(Kontrast(data[:,1], data[:,2])),'rx', label='Maximum des Kontrasts')
+plt.plot(np.rad2deg(phi_rad_lin),Delta_phi(phi_rad_lin,A_fit.n), label="Fit der Messwerte")
 plt.legend()
 plt.xlabel('Winkel des Polfilters / °')
 plt.ylabel('Kontrast')
@@ -44,7 +59,7 @@ params, cov = curve_fit(Delta_phi,phi_rad,Kontrast)
 phi_rad_lin = np.linspace(0,np.pi,1000)
 
 A_fit = un.ufloat(params,np.absolute(cov)**0.5)
-
+print(A_fit)
 plt.plot(phi_rad,Kontrast,'x',label="Messwerte")
 plt.plot(phi_rad_lin,Delta_phi(phi_rad_lin,A_fit.n), label="Ausgleichsrechnung")
 plt.legend()
@@ -77,7 +92,7 @@ n_glas_err = np.std(n_glas)
 n_glas_exp=np.array([n_glas_mean,n_glas_err])
 n_glas_u = ufloat(n_glas_mean,n_glas_err)
 
-print('Brechungsindex Glas: ', n_glas_u)
+print('Brechungsindex Glas: ', n_glas_u,'\n\n\n')
 
 ###############################################################
 
@@ -95,6 +110,7 @@ def n_func(counts):
 
 def lorentz(p, A, T=19.2+273.15):
     R = 8.31446261815324 #SI
+    #print('T: ',T)
     return (1 + 3*A*p/(R*T))**(1/2)
 
 
@@ -102,22 +118,22 @@ def lorentz(p, A, T=19.2+273.15):
 counts = [counts1, counts2, counts3]
 
 plt.figure()
-A_fit_mean = np.array([])
+A_fit_mean = unumpy.uarray(np.zeros(3), np.zeros(3))
 p_lin = np.linspace(np.min(p), np.max(p), 10000)
 n_mess = unumpy.uarray(np.zeros(3), np.zeros(3))
 for i in range(3):
     n_luft1 = n_func(counts[i])
-    print(n_luft1)
+    print('Brechungsindex Luft Bei Messung ', str(i+1) ,n_luft1)
     n_luft1_n = unumpy.nominal_values(n_luft1)
 
-    params, cov = curve_fit(lorentz,p,np.array(n_luft1_n))
+    params, cov = curve_fit(lorentz,p,np.array(n_luft1_n), T)
     A_fit = un.ufloat(params,np.absolute(cov)**0.5)
     print('A_fit : ',A_fit)
-    n_mess[i] = lorentz(100000, A_fit)
-    print('Brechungsindex bei Normaldruck für Messung ' + str(i) +'\,', lorentz(100000, A_fit))
+    n_mess[i] = lorentz(100000, A_fit, T)
+    print('Brechungsindex bei Normaldruck für Messung ' + str(i+1) +': ', lorentz(100000, A_fit, T))
     plt.plot(p,n_luft1_n, 'bx', label = 'n der Messung ' + str(i+1))
     plt.plot(p_lin,lorentz(p_lin, unumpy.nominal_values(A_fit)), label = 'Fit, Messung ' + str(i+1))
-    A_fit_mean = A_fit_mean.append(A_fit)
+    A_fit_mean[i] =(A_fit)
     plt.legend()
     plt.xlabel('Druck / ' + r'$\mathrm{Pa}$')
     plt.ylabel('Brechungsindex n')
@@ -125,8 +141,10 @@ for i in range(3):
 plt.savefig("build/Gas.pdf")
 
 A = np.mean(A_fit_mean)
-normaldruck = lorentz(100000, A, T=21+273.15) #normalatmosspähre?
+print(A)
+normaldruck = lorentz(101325, A, T=15+273.15) #normalatmosspähre !
 
+print('Brechungsindex bei Normaldruck' ,normaldruck)
 
 print('Mittelwert der drei Messungen: ', np.mean(n_mess) )
 
@@ -134,4 +152,4 @@ print('Mittelwert der drei Messungen: ', np.mean(n_mess) )
 def abw(n_2, n_1):
     return (n_1-n_2)/(n_1+n_2)
 
-print(abw(1.000292,np.mean(n_mess)))
+print(abw(1.000292,np.mean(normaldruck)))
