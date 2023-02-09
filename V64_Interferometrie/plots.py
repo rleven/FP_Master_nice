@@ -150,6 +150,6 @@ print('Mittelwert der drei Messungen: ', np.mean(n_mess) )
 
 
 def abw(n_2, n_1):
-    return (n_1-n_2)/(n_1+n_2)
+    return (n_1-n_2)/(n_1*100)
 
-print(abw(1.000292,np.mean(normaldruck)))
+print(abw(1.000292-1,normaldruck-1))
