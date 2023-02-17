@@ -9,7 +9,7 @@ Zur besseren Beschreibung des Aufbaus wird dieser vereinfacht in drei Segmente g
 Der Aufbau inklusive Schaltung kann in Abbildung \ref{fig:aufbau} gesehen werden.
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{data/aufbau.png}
+    \includegraphics[width=0.65\textwidth]{data/aufbau.png}
     \caption{Eine schematische Darstellung des Aufbaus der im Versuch verwendet wird. \cite{V01}}
     \label{fig:aufbau}
 \end{figure}
@@ -17,20 +17,21 @@ Der Aufbau inklusive Schaltung kann in Abbildung \ref{fig:aufbau} gesehen werden
 \subsubsection{Detektionsbereich}
 Der Detektionsbereich ist der erste der drei Teile des Aufbaus.
 Er besteht aus einem Szintillatortank mit einem Volumen von ungefähr $V = \SI{50}{\litre}$.
-Durch Eintreten eines Myons entsteht in dem Szintillatortank ein Lichtblitz.
+Durch Eintreten eines Myons wir das Szintillatormaterial ionisiert, wodurch Photonen emittiert werden.
 Dieser Lichtblitz kann mithilfe von zwei Photomultipliern (PMT) detektierten werden.
 An den PMT liegt dabei eine Hochspannung an.
-Beim Eintreten eines Photons in einen der PMT wird dabei eine Elektronenkaskade ausgelöst.
+Beim Eintreten der Photonen in einen der PMT wird dabei eine Elektronenkaskade ausgelöst.
 Diese erzeugt letztendlich ein Spannungssignal, welches in die Schaltung gegeben wird.\\
 Aber nicht nur beim Eintritt eines geladenen Teilchens wird ein Lichtblitz erzeugt sondern auch beim Zerfall.
-Im Fall des Myons liegt es daran, dass es in ein Elektron  sowie zwei Neutrinos zerfällt.
+Im Fall des Myons liegt es daran, dass es in ein Elektron sowie zwei Neutrinos zerfällt.
 Die Neutrinos haben im Vergleich zu den Myonen eine nur geringe Masse.
 Die Masse des Myons ist im Vergleich zum Elektron groß.
 Aufgrund dieser Massendifferenz hat das entstandene Zerfalls Elektron eine hohe kinetische Energie.
 Diese kinetische Energie deponiert das Elektron in Form von Photonen im Szintillatortank.\\
 Diese Photonen könne von den PMT gemessen werden.
 Um möglichst wenig Fehlmessungen zu erhalten werden zwei PMTs genutzt, die beide ein Signal messen müssen damit die Stoppuhr aktiviert wird.
-Dafür werden an beide PMT jeweils eine Verzögerungsleitung angeschlossen.
+In diesem Kontext ist eine Fehlmessung, die Ausgabe eines Signals durch ein PMT obwohl kein Myon in das Detektorvolumen eingetreten ist.
+Aus diesem Grund werden an beide PMT jeweils eine Verzögerungsleitung angeschlossen.
 Diese sorgt dafür, dass die Spannungsimpulse der PMTs gleichzeitig an der Koinzidenz ankommen.
 Zwischen PMT und Koinzidenz befindet sich zudem ein Diskriminator, welcher dafür sorgt, dass nur genügend große Spannungsimpulse durchgelassen werden.
 Wenn zwei Spannungsimpulse gleichzeitig an der Koinzidenz ankommen gibt diese ein Signal weiter an den Stoppuhr-Bereich der Schaltung.
