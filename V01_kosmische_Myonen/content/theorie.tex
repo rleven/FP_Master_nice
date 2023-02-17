@@ -1,18 +1,18 @@
 \section{Theorie}
 \label{sec:theorie}
-In diesem Teil des Protokoll werden die theoretischen Grundlagen des Versuchs erarbeitet.
+In diesem Teil des Protokoll werden die theoretischen Grundlagen des Versuchs erläutert.
 \subsection{Das Myon}
 Myonen sind leptonische Elementarteilchen.
-Sie werden in das Standardmodell zwischen den Elektronen und den Tauonen eingeordnet und besitzen eine Masse von $m_\mu = \SI{105.65}{\mega\eV}$ \cite{myonen}.
+Sie werden in das Standardmodell der Teilchenphysik zwischen den Elektronen und den Tauonen eingeordnet und besitzen eine Masse von $m_\mu = \SI{105.65}{\mega\eV}$ \cite{myonen}.
 Sie sind genauso wie das Elektronen negativ geladen, wobei diese Ladung betragsmäßig einer Elementarladung $e$ entspricht.
 Im Gegensatz zum Elektronen zerfallen Myonen allerdings nach kurzer Zeit, ihre mittlere Lebenszeit beträgt dabei $\tau_\mu = \SI{2.196}{\micro\second}$ \cite{myonen}.
 \subsubsection{Kosmische Myonen}
 Die Quelle von Myonen die in diesem Versuch verwendet wird, sind kosmische Myonen.
 Diese entstehen als Teil einer Zerfallskette, welche durch ein Proton ausgelöst wird.
-Die Protonen stammen dabei zum größten Teil von der Sonne.\\
+Die Protonen stammen dabei aus kosmischer Strahlung, die anteilmäßig stärkste Quelle ist dabei die Sonne.\\
 Wenn das Proton in die Erdatmosphäre eintritt löst dieses einen hadronischen Schauer aus.
 Dabei zerfällt das Proton am häufigsten in ein Pion $\pi$.
-Ein Zerfall in ein Kaon $K$ ist auch möglich, tritt allerdings nur in $(10-15)\%$ der Fälle auf.
+Ein Zerfall in ein Kaon $K$ ist auch möglich, tritt allerdings nur in $(10-15)\%$ \cite{myonen} der Fälle auf.
 \FloatBarrier
 \begin{figure}
     \begin{minipage}{0.55\textwidth}
@@ -27,20 +27,17 @@ Die gesamte Zerfallskette wird in Abbildung \ref{fig:hadronischerschauer} verans
 \hfill
 \begin{minipage}{0.4\textwidth}
     \includegraphics[width=\textwidth]{data/hadronischerschauer.png}
-    \caption{Ein statischer hadronischer Schauer, welcher durch ein Proton ausgelöst wird.
-    Es werden die möglichen Zerfallsketten dargestellt die bei einem solchen Schauer auftreten können. \cite{astroteilchenbuch}}
+    \caption{Ein statischer hadronischer Schauer, welcher durch ein Proton\\ ausgelöst wird.
+    Es werden die möglichen Zerfallsketten dargestellt \\ die bei einem solchen Schauer auftreten können. \cite{astroteilchenbuch}}
     \label{fig:hadronischerschauer}
 \end{minipage}
 \end{figure}\FloatBarrier
-Es fällt nun auf, dass trotz der hohen Geschwindigkeit der entstandenen Myonen von $0.999c$ mit $c$ als Lichtgeschwindigkeit im Vakuum, die Myonen nicht auf der Erde ankommen sollten.
+Trotz der hohen Geschwindigkeit der entstandenen Myonen von $0.999c$ mit $c$ als Lichtgeschwindigkeit im Vakuum, sollten die Myonen aus klassischer Sicht nicht auf der Erde ankommen.
 Denn sie würden aufgrund ihrer kurzen Lebensdauer nach ungefähr $\SI{650}{\meter}$ zerfallen, also bevor sie die Erdoberfläche erreichen.
 Dies gilt allerdings nur für die klassische Betrachtung.\\
 Da das Myon aber eine hoch relativistische Geschwindigkeit besitzt, tritt im Bezugssystem des Myons Längenkontraktion auf.
-Wenn dieser relativistische Effekt beachtet wird, ändert sich die Flugdistanz des Myons auf $\SI{62}{\kilo\meter}$. \\
-Da das Myon eine relativistische Geschwindigkeit besitzt ist es sehr unwahrscheinlich, dass es, ohne weitere Effekte zu nutzen, in der Detektorkammer zerfällt.
-Aus diesem Grund wird ein Szintillator genutzt.
-In diesem deponiert das Myon sehr viel Energie und wird so gebremst. 
-So steigt die Rate an Myonen die tatsächlich im Szintillator zerfallen und keine Fehlmessung auslösen.
+Wenn dieser relativistische Effekt beachtet wird, ändert sich die mittlere Flugdistanz des Myons auf $\SI{62}{\kilo\meter}$. \\
+Da das Myon eine relativistische Geschwindigkeit besitzt ist es unwahrscheinlich, dass es, ohne weitere Effekte zu nutzen, in der Detektorkammer zerfällt.
 \subsection{Zerfallszeit}
 Die Anzahl von Myonen $\symup{d}N$ die in einem Zeitintervall $\symup{d}t$ im Tank zerfallen, ist gegeben durch die Differentialgleichung
 \begin{equation*}
@@ -55,9 +52,9 @@ Diese Differentialgleichung wird durch den Ansatz
 gelöst, wobei $N_0$ die Anzahl der Teilchen zum Zeitpunkt $t=0$ ist.
 Durch Gleichung \eqref{eq:zerfall} kann anschließend die mittlere Lebensdauer $\lambda = 1/\tau$ bestimmt werden.
 \subsection{Untergrund}
-Die Messung leidet unter einem Poisson verteilten Untergrund.
-Sein Ursprung liegt darin, dass ein zweites Myon in die Detektorkammer eintreten kann.
-Dieses Eintreten würde die Messung der Zerfallszeit des ersten Myons unterbrechen.
+Bei der Messung ist ein Poisson verteilter Untergrund zu beachten.
+Sein Ursprung liegt darin, dass ein zweites Myon in die Detektorvolumen eintreten kann.
+Dieses Eintreten wird die Messung der Zerfallszeit des ersten Myons stoppen.
 Um den Effekt durch den Untergrund so gering wie möglich zu halten, wird die theoretische Untergrundrate berechnet.
 Die Anzahl der gemessenen Myonen $n$ folgt der Poissonverteilung
 \begin{equation*}
