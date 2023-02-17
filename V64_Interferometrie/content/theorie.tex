@@ -79,14 +79,22 @@ wobei $I_{\text{Laser}}$ die mittlere Ausgangsintensität des He-Ne Lasers und $
 \autoref{eq:intense} kann aus der Beziehung
 \begin{equation}
     I \propto <|E_1\cos\left(\omega t\right) + E_2\cos\left(\omega t + \delta\right)|^2>
+    \label{eq:intenseeee}
 \end{equation}
-hergeleitet werden.
-Hierbei sind $E_{1,2}$ die Amplituden der elektrischen Felder der Lichtstrahlen im Interferometer, $<...>$ eine Zeitmittlung über eine Periode und $\delta$ die Phasendifferenz der beiden Strahlen.\\
-Wird angenommen, dass beide Strahlen dieselbe Amplitude $E$ aufweisen, so lassen sich $E_{1,2}$ anhand des Polarisationswinkels $\phi$ ausdrücken:
+mit $E_{1,2}$ als Amplituden der elektrischen Felder der Lichtstrahlen im Interferometer, $<...>$ als Zeitmittlung über eine Periode und $\delta$ als die Phasendifferenz der beiden Strahlen, hergeleitet werden.\\
+Dafür wird angenommen, dass beide Strahlen dieselbe Amplitude $E$ aufweisen.
+So lassen sich $E_{1,2}$ anhand des Polarisationswinkels $\phi$ ausdrücken:
 \begin{align}
     E_1 = E\cdot \cos\left(\phi\right)\\
     E_2 = E\cdot \sin\left(\phi\right)
 \end{align}
+Werden diese Terme in \autoref{eq:intenseeee} eingesetzt und konstruktive bzw. destruktive Interferenz angenommen, gilt:
+\begin{alignat}{2}
+    &I &&\propto <\left(E_1^2\cos\left(\omega t\right)^2 \pm 2E_1E_2\cos\left(\omega t\right)\cos\left(\omega t + \delta\right) + E_2^2\cos\left(\omega t + \delta\right)^2\right)>\\
+    \iff &I &&\propto E^2\cos\left(\phi\right)^2 \pm 2E^2\cos\left(\phi\right)\sin\left(\phi\right) + E^2\sin\left(\phi\right)^2\\
+    \iff &I &&\propto E^2\left[1 \pm 2\cos\left(\phi\right)\sin\left(\phi\right)\right]\\
+    \iff &I &&\propto I_{\text{Laser}}\left[1 \pm 2\cos\left(\phi\right)\sin\left(\phi\right)\right] \quad \text{mit} \quad E^2 = I_{\text{Laser}}
+\end{alignat}
 Die Abhängigkeit des Kontrasts vom Polarisationswinkel ist gegeben durch
 \begin{equation}
     V = \sin\left(2\phi\right)
