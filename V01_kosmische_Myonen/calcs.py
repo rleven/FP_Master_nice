@@ -16,7 +16,7 @@ y = np.genfromtxt("data/daten.txt")
 x = 0.0216*x0 + 0.15423
 
 mod = ExponentialModel()
-pars = mod.guess(y[4::463], x=x[4::463])
+pars = mod.guess(y[4:463], x=x[4:463])
 out = mod.fit(y, pars, x=x)
 
 print(out.fit_report()) #amplitude = 93.5814 +/- 1.9725 , decay = 2.5555 +/- 0.0723
@@ -25,39 +25,11 @@ del mod, pars, out
 
 print("###------###")
 
-t1, t2, c0 = np.genfromtxt("data/delayline.csv", unpack=True, delimiter=",")
-t3 = t1-t2
-t4 = np.flip(t3[1:31])
-t5 = np.append(t3[0], t3[31:61])
-t = np.append(t4,t5)
-
-c1 = np.flip(c0[1:31])
-c2 = np.append(c0[0], c0[31:61])
-c = np.append(c1,c2)
-
-mod = GaussianModel()
-pars = mod.guess(c, x=t)
-out = mod.fit(c, pars, x=t)
-
-print(out.fit_report())
-
-c1 = unumpy.uarray(c, np.sqrt(c))
-
-plt.plot(t, out.best_fit, label='Gauss Fit')
-plt.errorbar(t, unumpy.nominal_values(c1), yerr=unumpy.std_devs(c1), fmt='o', color='red', capsize=2, label="Messwerte mit Fehlern")
-plt.xlabel('Differenz der beiden Verzögerungsleitungen in ns')
-plt.ylabel('Counts pro 10 s')
-plt.legend(loc='best')
-plt.tight_layout()
-plt.savefig("images/fwhm.pdf")
-
-del mod, pars, out
-
 y_min = y - np.sqrt(y)
 y_max = y + np.sqrt(y)
 
 mod = ExponentialModel()
-pars = mod.guess(y_min[4::463], x=x[4::463])
+pars = mod.guess(y_min[4:463], x=x[4:463])
 out = mod.fit(y_min, pars, x=x)
 
 print("Min: ",out.fit_report()) #amplitude = 85.2245 +/- 1.8929 , decay = 2.3260 +/- 0.0688
@@ -65,7 +37,7 @@ print("Min: ",out.fit_report()) #amplitude = 85.2245 +/- 1.8929 , decay = 2.3260
 del mod, pars, out
 
 mod = ExponentialModel()
-pars = mod.guess(y_max[4::463], x=x[4::463])
+pars = mod.guess(y_max[4:463], x=x[4:463])
 out = mod.fit(y_max, pars, x=x)
 
 print("Max: ",out.fit_report()) #amplitude = 102.1485 +/- 2.0711 , decay = 2.7548 +/- 0.0754

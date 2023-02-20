@@ -17,23 +17,23 @@ Bei einem Messintervall von $\Delta t = \SI{10}{\second}$ werden die Pulse der P
     \label{fig:fwhm}
 \end{figure}
 
-Zur Bestimmung der Halbwertsbreite wurde der Verlauf der Messdaten an eine Gauss-Funktion angenähert.
-Dies wurde lediglich genutzt, um die Halbwertsbreite auszurechnen, nicht weil die Messwerte tatsächlich einer Gauss-Funktion folgen.\\
-In \autoref{fig:fwhm} ist dieser Gauss-Fit dargestellt, dessen Funktionsparameter berechnet wurden zu:
+Wie in \autoref{sec:durchfuerung} beschrieben, gibt die Koinzidenz nur ein Signal aus, wenn beide PMT einen Lichtblitz messen.
+Wird die Messung eines PMT zu stark verzögert, so gibt es kein Signal.\\
+Zu erwarten ist somit eine Plateaufunktion mit seitlich abfallenden Werten und dem Plateau dazwischen.
+Zur Bestimmung der Halbwertsbreite wurde der Verlauf der Messdaten an eine Plateau-Funktion angenähert.
+In \autoref{fig:fwhm} ist dieser Plateau-Fit dargestellt, dessen Funktionsparameter berechnet wurden zu:
 \begin{itemize}
-    \item $A = 6546.1098 \pm 208.5633$
-    \item $\mu = 2.4270 \pm 0.3405$
-    \item $\sigma = 11.4103 \pm 0.4709$
+    \item $A = 215.914$
+    \item $\mu = 1.617$
+    \item $\sigma = 14.843$
+    \item $n = 1.675$
 \end{itemize}
-bei einer Gauss-Funktion der Form
+bei einer Plateau-Funktion der Form
 \begin{equation}
-    f(x;A,\mu,\sigma) = \frac{A}{\sigma \sqrt{2\pi}}e^{\left[-\left(x - \mu\right)^2/{2\sigma^2}\right]}
+    f(x;A,\mu,\sigma, n) = A\cdot \exp\left(-\left(\frac{\left|x - \mu\right|}{\sigma}\right)^{2n}\right)
 \end{equation}.\\
-Die Halbwertsbreite lässt sich aus dem Parameter $\sigma$ bestimmen über die Relation
-\begin{equation}
-    fwhm = 2\sqrt{2\ln2}\cdot \sigma
-\end{equation}
-und ergibt für diesen Gauss-Fit $fwhm = \left(26.8692\pm1.1089\right)\si{\nano\second}$.\\
+Die Halbwertsbreite lässt sich aus den Werten des Minimums und des Plateaus ermitteln.
+Der halbe Wert beträgt $82.877\pm0.007$ counts und ergibt eine Breite von $fwhm = \left(29.305\pm0.0014\right)\si{\nano\second}$.\\
 Die Daten sind in \autoref{tab:fwhm} aufgelistet.
 
 \subsection{MCA Kalibration}
@@ -57,7 +57,8 @@ und gibt den jeweiligen Pulsabstand einer Kanalnummer an.\\
 Die Daten sind in \autoref{tab:linear} aufgelistet.
 
 \subsection{Berechnung der Untergrundrate}
-Die Messung zeichnete 5635849 Start Signale auf und 15414 Stopp Signale.\\
+Die Messung zeichnete 5635849 Start Signale auf und 15414 Stopp Signale.
+Es gibt insgesamt 512 Kanäle, von denen die ersten vier sowie die letzten 47 keine Messdaten beinhalten.\\
 Gemäß \autoref{eq:untergrund} wird zunächst der Erwartungswert der Verteilung $\lambda$ berechnet.
 Die Suchzeit betrug $T_{\text{Such}} = $\SI{14}{\micro\second} und die totale Messzeit umfasste $t_{\text{ges}} = $\SI{253654}{\second}.
 Daraus ergibt sich ein Erwartungswert von $\lambda \approx 311.06\cdot 10^{-6}$ und damit nach \autoref{eq:untergrund} ein Untergrund von $1752.55$.\\
@@ -75,6 +76,7 @@ In \autoref{fig:myonenroh} sind die rohen Messergebnisse nach ca. 3 Tagen totale
 
 Nach Konvertierung der Kanäle in Zerfallsdauern, mit der Ausgleichsgerade bestimmt in \autoref{sec:calli}, wird ein Fit an die Messdaten samt Unsicherheiten angelegt.
 Das Ergebnis dieses Exponential-Funktion Fits, nach \autoref{eq:zerfall}, ist in \autoref{fig:myonen} dargestellt.
+Hierbei wurden die Untergrundmessungen in den Unsicherheiten berücksichtigt und alle Nullwerte aus den Kanälen ohne Messwerte aus der Fit-Berechnung ausgelassen.
 
 \begin{figure}[H]
     \centering
